@@ -56,24 +56,6 @@ $(function () {
         $("#formEditModalAdminQuiz").modal("show");
     }
 
-    // Penanganan error form modal saat Add & Edit dokumen
-    const errorAddDocumentTitle = $("#errorModalAddDocument").data("error-title");
-    const errorAddDocumentDesc = $("#errorModalAddDocument").data("error-desc");
-    const errorAddDocument = $("#errorModalAddDocument").data("error-document");
-    const errorEditDocumentTitle = $("#errorModalEditDocument").data("error-edit-title");
-    const errorEditDocumentDesc = $("#errorModalEditDocument").data("error-edit-desc");
-    const errorEditDocument = $("#errorModalAddDocument").data("error-edit-document");
-    const errorEditDocumentStatus = $("#errorModalEditDocument").data("error-edit-status");
-
-    // Jika terjadi kesalahan saat Add dokumen
-    if (errorAddDocumentTitle || errorAddDocumentDesc || errorAddDocument) {
-        $("#formModalAdminDocument").modal("show");
-    }
-    // Jika terjadi kesalahan saat Edit dokumen
-    if (errorEditDocumentTitle || errorEditDocumentDesc || errorEditDocument || errorEditDocumentStatus) {
-        $("#formEditModalAdminDocument").modal("show");
-    }
-
     // form modal errors if add question
     const errorQuestion = $("#errorModaladdQuestion").data("error-question");
     const option1 = $("#errorModaladdQuestion").data("error-option1");
@@ -266,6 +248,40 @@ $(function () {
     );
     if (deleteUserSuccess) {
         setMessage(deleteUserSuccess, "success");
+    }
+
+    // add materi success
+    const addMateri = $(".flash-message").data("add-materi");
+    if (addMateri) {
+        setMessage(addMateri, "success");
+    }
+    // edit materi success
+    const editMateri = $(".flash-message").data("edit-materi");
+    if (editMateri) {
+        setMessage(editMateri, "success");
+    }
+    // delete materi success
+    const deleteMateri = $(".flash-message").data("delete-materi");
+    if (deleteMateri) {
+        setMessage(deleteMateri, "success");
+    }
+
+    // Penanganan error form modal saat Add & Edit materi
+    const errorAddMateriTitle = $("#errorModalAddMateri").data("error-title");
+    const errorAddMateriDesc = $("#errorModalAddMateri").data("error-desc");
+    const errorAddMateriDocument = $("#errorModalAddMateri").data("error-document");
+    const errorEditMateriTitle = $("#errorModalEditMateri").data("error-edit-title");
+    const errorEditMateriDesc = $("#errorModalEditMateri").data("error-edit-desc");
+    const errorEditMateriDocument = $("#errorModalEditMateri").data("error-edit-document");
+    const errorEditMateriStatus = $("#errorModalEditMateri").data("error-edit-status");
+
+    // Jika terjadi kesalahan saat Add dokumen
+    if (errorAddMateriTitle || errorAddMateriDesc || errorAddMateriDocument) {
+        $("#formModalAdminMateri").modal("show");
+    }
+    // Jika terjadi kesalahan saat Edit dokumen
+    if (errorEditMateriTitle || errorEditMateriDesc || errorEditMateriDocument || errorEditMateriStatus) {
+        $("#formEditModalAdminMateri").modal("show");
     }
 
     // add dictionary success
