@@ -14,12 +14,10 @@ use App\Http\Controllers\AdminPenggunaController;
 use App\Http\Controllers\AdminLaporanController;
 use App\Http\Controllers\DictionaryController;
 use App\Http\Controllers\DiscussController;
-use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\KamusController;
-use App\Http\Controllers\MateriController;
+use App\Http\Controllers\MaterialController;
 use App\Models\User;
 use App\Models\Quiz;
 use App\Models\Thread;
@@ -72,6 +70,9 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/forgot-password', [ForgotPasswordController::class, 'forgotpassword'])->name('forgot-password');
 Route::get('/reset-password', [ForgotPasswordController::class, 'resetpassword'])->name('reset-password');
 
+// materi users
+Route::get('/materi', [MaterialController::class, 'show'])->middleware('member')->name('materi');
+Route::get('/materi/search', [MaterialController::class, 'search_users'])->middleware('member');
 
 // quiz users
 Route::get('/quiz', [QuizController::class, 'index'])->middleware('member');
@@ -90,7 +91,7 @@ Route::get('/nilai', [NilaiQuizController::class, 'index'])->middleware('member'
 Route::get('/nilai/details/{nilai:code}', [NilaiQuizController::class, 'show'])->middleware('member');
 Route::post('/nilai/delete/{result:code}', [NilaiQuizController::class, 'destroy'])->middleware('member');
 
-// Setting users
+// setting users
 Route::get('/pengaturan', [PengaturanUsersController::class, 'index'])->middleware('member');
 Route::post('/pengaturan', [PengaturanUsersController::class, 'store'])->middleware('member');
 Route::post('/pengaturan/verify', [PengaturanUsersController::class, 'verify'])->middleware('member');
@@ -123,6 +124,19 @@ Route::get('/admin/data-kamus/delete', function () {
 })->middleware('admin');
 Route::get('/admin/data-kamus/search', [DictionaryController::class, 'search'])->middleware('admin');
 
+// admin materi
+Route::get('/admin/data-materi', [MaterialController::class, 'index'])->middleware('admin');
+Route::post('/admin/data-materi', [MaterialController::class, 'store'])->middleware('admin');
+Route::post('/admin/data-materi/update', [MaterialController::class, 'update'])->middleware('admin');
+Route::get('/admin/data-materi/update', function () {
+    return back();
+})->middleware('admin');
+Route::post('/admin/data-materi/delete', [MaterialController::class, 'destroy'])->middleware('admin');
+Route::get('/admin/data-materi/delete', function () {
+    return back();
+})->middleware('admin');
+Route::get('/admin/data-materi/search', [MaterialController::class, 'search'])->middleware('admin');
+
 // admin latihan
 Route::get('/admin/data-quiz', [AdminDataQuizController::class, 'index'])->middleware('admin');
 Route::get('/admin/data-quiz/search', [AdminDataQuizController::class, 'search'])->middleware('admin');
@@ -150,7 +164,7 @@ Route::get('/admin/data-quiz/q&a/update/question', function () {
 })->middleware('admin');
 Route::get('/admin/data-quiz/q&a/{quiz:slug}/search', [AdminDataQuizController::class, 'searchquestion'])->middleware('admin');
 
-// Setting admin
+// setting admin
 Route::get('/admin/pengaturan', [AdminPengaturanController::class, 'index'])->middleware('admin');
 Route::post('/admin/pengaturan', [AdminPengaturanController::class, 'store'])->middleware('admin');
 Route::post('/admin/pengaturan/verify', [AdminPengaturanController::class, 'verify'])->middleware('admin');
