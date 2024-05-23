@@ -44,7 +44,7 @@ Route::get('/',  function () {
     ]);
 });
 
-// Kamus homepage
+// Kamus users
 Route::get('/kamus', [DictionaryController::class, 'index_users']);
 Route::get('/kamus/search', [DictionaryController::class, 'search_users']);
 
@@ -69,6 +69,20 @@ Route::post('/register', [RegisterController::class, 'store']);
 // forgot password
 Route::get('/forgot-password', [ForgotPasswordController::class, 'forgotpassword'])->name('forgot-password');
 Route::get('/reset-password', [ForgotPasswordController::class, 'resetpassword'])->name('reset-password');
+
+// Documentation App
+Route::get('/docs/v1', function () {
+    return view('dokumentasi.index', [
+        'app' => Application::first(),
+        'title' => 'Dokumentasi'
+    ]);
+});
+Route::get('/docs/v1/start', function () {
+    return view('dokumentasi.start', [
+        'app' => Application::first(),
+        'title' => 'Dokumentasi'
+    ]);
+});
 
 // materi users
 Route::get('/materi', [MaterialController::class, 'show'])->middleware('member')->name('materi');
