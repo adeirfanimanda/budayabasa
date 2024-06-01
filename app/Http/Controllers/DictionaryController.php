@@ -100,7 +100,6 @@ class DictionaryController extends Controller
         ]);
     }
 
-
     // users search -> implementasi redis sebagai cache
     public function search_users()
     {
@@ -111,7 +110,9 @@ class DictionaryController extends Controller
         }
 
         $cacheKey = 'search_' . $keyword;
-        $dictionaries = Cache::remember($cacheKey, 60 * 60, function () use ($keyword) {
+        $cacheTime = 86400;
+
+        $dictionaries = Cache::remember($cacheKey, $cacheTime, function () use ($keyword) {
             return Dictionary::latest()->searching2($keyword)->paginate(10);
         });
 
