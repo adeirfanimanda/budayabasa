@@ -116,7 +116,7 @@
                         <div><strong>{{ $loop->iteration }}</strong></div>
                         <div><strong>Ngoko (Sehari-hari) :</strong> {{ $dictionary->ngoko }}</div>
                         <div><strong>Krama (Bebasan) :</strong> {{ $dictionary->krama }}</div>
-                        <div><strong>Bahasa Indonesia :</strong> {{ $dictionary->indonesia }}</div>
+                        <div><strong>Bahasa Indonesia :</strong> {{ $dictionary->indonesian }}</div>
                         <div><strong>Contoh Kalimat :</strong> {{ $dictionary->example }}</div>
                     </div>
                 @endforeach
