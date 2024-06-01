@@ -29,7 +29,7 @@
                     <form action="/materi/search">
                         <div class="input-group">
                             <input type="search" class="form-control" value="{{ request('q') }}" name="q"
-                                id="search" style="border: 1px solid #d9dee3;" placeholder="Cari Data Materi..."
+                                id="search" style="border: 1px solid #d9dee3;" placeholder="Cari Materi..."
                                 autocomplete="off" />
                         </div>
                     </form>
