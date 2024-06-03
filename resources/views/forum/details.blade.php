@@ -126,7 +126,16 @@
                     {{ $thread->content }}
                 </p>
                 <hr class="my-4">
-                <form class="mb-5" action="" method="post">
+                <div class="d-flex justify-content-between align-items-center flex-wrap mb-2 gap-1">
+                    <div class="d-flex">
+                        <h5 class="mb-0" id="comments">({{ $thread->comment->count() }}) Komentar</h5>
+                    </div>
+                    <div class="d-flex">
+                        <button id="toggleCommentForm" class="btn btn-primary">Tambah Komentar</button>
+                    </div>
+                </div>
+                <!-- Form komentar yang disembunyikan -->
+                <form id="commentForm" class="mb-5" action="" method="post" style="display: none;">
                     @csrf
                     <div>
                         <label for="comment" class="form-label required-label">Tambah Komentar</label>
@@ -139,14 +148,15 @@
                         @enderror
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-label-primary btn-comment disabled"><i
-                                class='bx bx-paper-plane fs-6' style="margin-bottom: 3px;"></i>&nbsp;Kirim</button>
+                        <button type="submit" class="btn btn-label-primary btn-comment disabled">
+                            <i class='bx bx-paper-plane fs-6' style="margin-bottom: 3px;"></i>&nbsp;Kirim
+                        </button>
                     </div>
                 </form>
-                <h5 class="mb-4" id="comments">({{ $thread->comment->count() }}) Komentar</h5>
                 @if ($comments->isEmpty())
                     <span class="d-flex justify-content-lg-start justify-content-center mb-2"><i
-                            class='bx bx-info-circle fs-5' style="margin-top: 3px;"></i>&nbsp;Belum ada komentar!</span>
+                            class='bx bx-info-circle fs-5' style="margin-top: 3px;"></i>&nbsp;Belum ada komentar!
+                    </span>
                 @endif
                 @foreach ($comments as $comment)
                     <div>
@@ -172,7 +182,12 @@
                         <div class="d-flex cursor-pointer" style="margin-left: 2.5rem; font-size:14px;">
                             <div class="me-2 text-primary fw-bold toggle-reply-form"
                                 data-target=".comment-reply-{{ $comment->id }}"><i
-                                    class='bx bx-share fs-6 bx-sm mx-1'></i>Balas</div>
+                                    class='bx bx-share fs-6 bx-sm mx-1'></i>Balas
+                            </div>
+                            <div class="me-2 text-warning fw-bold toggle-reply-form"
+                                data-target=".comment-reply-{{ $comment->id }}"><i
+                                    class='bx bx-message-dots fs-6 bx-sm mx-1'></i>Kutip
+                            </div>
                             @if ($comment->user->id == auth()->user()->id)
                                 <div class="text-danger fw-bold button-delete-comment"
                                     data-message-comment="{{ $comment->comment }}"
@@ -201,7 +216,7 @@
                                     <button type="submit" class="btn btn-label-primary btn-comment disabled me-1"><i
                                             class='bx bx-paper-plane fs-6'
                                             style="margin-bottom: 3px;"></i>&nbsp;Kirim</button>
-                                    <button type="button" class="btn btn-outline-secondary batal-reply-button"
+                                    <button type="button" class="btn btn-outline-danger batal-reply-button"
                                         data-cancel-comment="{{ $comment->id }}"><i class='bx bx-share fs-6'
                                             style="margin-bottom: 3px;"></i>&nbsp;Batal</button>
                                 </div>
@@ -263,8 +278,7 @@
                                                 class="btn btn-label-primary btn-comment disabled me-1"><i
                                                     class='bx bx-paper-plane fs-6'
                                                     style="margin-bottom: 3px;"></i>&nbsp;Kirim</button>
-                                            <button type="button"
-                                                class="btn btn-outline-secondary batal-reply-button"
+                                            <button type="button" class="btn btn-outline-danger batal-reply-button"
                                                 data-cancel-comment="{{ $reply->id }}"><i class='bx bx-share fs-6'
                                                     style="margin-bottom: 3px;"></i>&nbsp;Batal</button>
                                         </div>
