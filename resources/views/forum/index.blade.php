@@ -38,9 +38,9 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="row gy-4 mb-4">
+        <div class="row gy-3 mb-4">
             @foreach ($threads as $thread)
-                <div class="col-md-6 col-xl-4">
+                <div class="col-md-12 col-xl-12">
                     <div class="card h-100 shadow-none border">
                         <div class="card-header flex-grow-0">
                             <div class="d-flex">
@@ -50,15 +50,17 @@
                                 </div>
                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-1">
                                     <div class="me-2">
-                                        <h5 class="mb-0 fw-semibold">{{ $thread->user->name }}@if ($thread->user->is_admin)
+                                        <h6 class="mb-0 fw-semibold">{{ $thread->user->name }}
+                                            @if ($thread->user->is_admin)
                                                 <i class='bx bxs-badge-check text-primary fs-6'
                                                     style="margin-bottom: 1px;" data-bs-toggle="tooltip"
                                                     data-popup="tooltip-custom" data-bs-placement="right"
                                                     title="Administrator"></i>
                                             @endif
-                                        </h5>
+                                        </h6>
                                         <small class="text-muted">Dipost
-                                            {{ $thread->created_at->locale('id')->diffForHumans() }}</small>
+                                            {{ $thread->created_at->locale('id')->diffForHumans() }}
+                                        </small>
                                     </div>
                                     @if ($thread->user->id == auth()->user()->id)
                                         <div class="dropdown">
@@ -69,8 +71,9 @@
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <a class="dropdown-item cursor-pointer button-delete-topic"
                                                     data-message-topic="{{ $thread->title }}"
-                                                    data-code="{{ encrypt($thread->id) }}"><i
-                                                        class='bx bx-trash fs-5 mb-1 me-2'></i>Hapus</a>
+                                                    data-code="{{ encrypt($thread->id) }}">
+                                                    <i class='bx bx-trash fs-5 mb-1 me-2'></i>Hapus
+                                                </a>
                                             </div>
                                         </div>
                                     @endif
@@ -78,9 +81,10 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <h1 class="text-truncate text-capitalize cursor-pointer" style="font-size: 1rem;"
+                            <h5 class="text-truncate text-capitalize cursor-pointer"
                                 onclick="window.location.href='/view/discuss/thread/{{ $thread->id }}'">
-                                {{ $thread->title }}</h1>
+                                {{ $thread->title }}
+                            </h5>
                             <div class="d-flex mt-4 align-items-center justify-content-between">
                                 <div class="card-actions">
                                     @php
@@ -108,14 +112,17 @@
                                             </a>
                                         </div>
                                         <a onclick="window.location.href='/view/discuss/thread/{{ $thread->id }}#comments'"
-                                            class="text-muted cursor-pointer"><i class="bx bx-chat me-1"
-                                                style="margin-bottom: 1px;"></i> {{ $thread->comment->count() }}</a>
+                                            class="text-muted cursor-pointer">
+                                            <i class="bx bx-chat me-1" style="margin-bottom: 1px;"></i>
+                                            {{ $thread->comment->count() }}
+                                        </a>
                                     </div>
                                 </div>
                                 <div>
                                     <a style="font-size: 0.875rem;"
-                                        href="/view/discuss/thread/{{ $thread->id }}">Lihat Detail <i
-                                            class='bx bx-right-arrow-alt mb-1'></i></a>
+                                        href="/view/discuss/thread/{{ $thread->id }}">Lihat Detail
+                                        <i class='bx bx-right-arrow-alt mb-1'></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -125,8 +132,9 @@
         </div>
 
         @if ($threads->isEmpty())
-            <span class="d-flex justify-content-center mb-2"><i class='bx bx-info-circle fs-5'
-                    style="margin-top: 3px;"></i>&nbsp;Data tidak ditemukan!</span>
+            <span class="d-flex justify-content-center mb-2">
+                <i class='bx bx-info-circle fs-5' style="margin-top: 3px;"></i>&nbsp;Data tidak ditemukan!
+            </span>
         @endif
 
         @if (!$threads->isEmpty() && $threads->lastPage() != 1)
@@ -146,7 +154,6 @@
                 </ul>
             </nav>
         @endif
-
     </div>
 </div>
 
@@ -203,33 +210,39 @@
         </form>
     </div>
 </div>
+
 <!-- Modal Delete Topic Thread -->
 <div class="modal fade" id="deleteTopicConfirm" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form action="" method="post" id="formDeleteTopic">
             @csrf
-            <input type="hidden" id="code-thread" name="code" value="old('code')">
+            <input type="hidden" id="code-thread" name="code" value="{{ old('code') }}">
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between">
-                    <h5 class="modal-title text-primary fw-bold">Konfirmasi&nbsp;<i class='bx bx-check-shield fs-5'
-                            style="margin-bottom: 3px;"></i></h5>
-                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-dismiss="modal"><i
-                            class="bx bx-x-circle text-danger fs-4" data-bs-toggle="tooltip"
-                            data-popup="tooltip-custom" data-bs-placement="auto" title="Tutup"></i></button>
+                    <h5 class="modal-title text-primary fw-bold">
+                        Konfirmasi&nbsp;<i class='bx bx-check-shield fs-5' style="margin-bottom: 3px;"></i>
+                    </h5>
+                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-dismiss="modal">
+                        <i class="bx bx-x-circle text-danger fs-4" data-bs-toggle="tooltip"
+                            data-popup="tooltip-custom" data-bs-placement="auto" title="Tutup"></i>
+                    </button>
                 </div>
                 <div class="modal-body" style="margin-top: -10px;">
                     <div class="col-sm fs-6 topicMessagesDelete"></div>
                 </div>
                 <div class="modal-footer" style="margin-top: -5px;">
-                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"><i
-                            class='bx bx-share fs-6' style="margin-bottom: 3px;"></i>&nbsp;Tidak</button>
-                    <button type="submit" class="btn btn-primary"><i class='bx bx-trash fs-6'
-                            style="margin-bottom: 3px;"></i>&nbsp;Ya, Hapus!</button>
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                        <i class='bx bx-share fs-6' style="margin-bottom: 3px;"></i>&nbsp;Tidak
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class='bx bx-trash fs-6' style="margin-bottom: 3px;"></i>&nbsp;Ya, Hapus!
+                    </button>
                 </div>
             </div>
         </form>
     </div>
 </div>
+
 @section('script')
     <script src="{{ asset('assets/js/forum/index.js') }}"></script>
 @endsection
