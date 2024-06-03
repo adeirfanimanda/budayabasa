@@ -48,3 +48,13 @@ $(".komentar").on("input", function () {
         $parentForm.find(".btn-comment").removeClass("disabled");
     }
 });
+
+// show button tambah komentar
+document.getElementById('toggleCommentForm').addEventListener('click', function() {
+    var form = document.getElementById('commentForm');
+    if (form.style.display === 'none' || form.style.display === '') {
+        form.style.display = 'block';
+    } else {
+        form.style.display = 'none';
+    }
+});
