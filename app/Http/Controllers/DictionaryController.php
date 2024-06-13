@@ -100,8 +100,23 @@ class DictionaryController extends Controller
         ]);
     }
 
-    // users search -> implementasi redis sebagai cache
     public function search_users()
+    {
+        $keyword = request('q');
+
+        if (!$keyword) {
+            return redirect('/kamus');
+        }
+
+        return view('kamus.search', [
+            'app' => Application::first(),
+            'title' => 'Kamus',
+            'dictionaries' => Dictionary::latest()->searching2($keyword)->get()
+        ]);
+    }
+
+    // users search -> implementasi redis sebagai cache
+    public function search_redis()
     {
         $keyword = request('q');
 
@@ -113,7 +128,7 @@ class DictionaryController extends Controller
         $cacheTime = 86400;
 
         $dictionaries = Cache::remember($cacheKey, $cacheTime, function () use ($keyword) {
-            return Dictionary::latest()->searching2($keyword)->paginate(10);
+            return Dictionary::latest()->searching2($keyword)->get();
         });
 
         return view('kamus.search', [
