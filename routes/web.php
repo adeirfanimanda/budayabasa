@@ -22,17 +22,6 @@ use App\Models\User;
 use App\Models\Quiz;
 use App\Models\Thread;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 // Homepage
 Route::get('/',  function () {
     return view('home', [
@@ -46,7 +35,7 @@ Route::get('/',  function () {
 
 // Kamus users
 Route::get('/kamus', [DictionaryController::class, 'index_users']);
-Route::get('/kamus/search', [DictionaryController::class, 'search_users']);
+Route::get('/kamus/search', [DictionaryController::class, 'search_redis']);
 
 // Authentication
 // login
