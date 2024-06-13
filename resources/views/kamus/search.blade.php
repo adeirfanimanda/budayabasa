@@ -5,9 +5,8 @@
     <title>{{ $app->name_app }} - {{ $title }}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-    <meta name="description" content="{{ $app->description_app }}">
     <link rel="icon" type="image/x-icon"
-        href="@if (Storage::disk('public')->exists('logo-aplikasi')) {{ asset('storage/' . $app->logo) }} @else {{ asset('assets/img/logo-aplikasi/logo.png') }} @endif">
+        href="@if (Storage::disk('public')->exists('logo-aplikasi')) {{ asset('storage/' . $app->logo) }} @else {{ asset('assets/img/logo-aplikasi/logo.svg') }} @endif">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('homepage/css/open-iconic-bootstrap.min.css') }}">
@@ -125,11 +124,11 @@
                         <strong>"{{ request('q') }}"</strong>
                     </div>
                 @endif
-                @if (!$dictionaries->isEmpty())
+                {{-- @if (!$dictionaries->isEmpty())
                     <div class="mt-3 pagination-mobile">
                         {{ $dictionaries->withQueryString()->onEachSide(1)->links() }}
                     </div>
-                @endif
+                @endif --}}
             </div>
         </div>
     </section>
