@@ -64,26 +64,11 @@
         <div>Forum</div>
     </a>
 </li>
-@can('admin')
-    <li class="menu-item {{ Request::is('admin/pengaturan') ? 'active' : '' }}">
-        <a class="menu-link cursor-pointer" onclick="window.location.href='/admin/pengaturan'">
-            <i class="menu-icon tf-icons bx bx-cog"></i>
-            <div>Pengaturan</div>
-        </a>
-    </li>
-@endcan
 @can('user')
     <li class="menu-item">
-        {{-- <a class="menu-link cursor-pointer" onclick="window.location.href='/docs/v1'"> --}}
-        <a class="menu-link cursor-pointer" onclick="window.location.href='#'">
+        <a class="menu-link cursor-pointer" onclick="window.location.href='/docs/v1'">
             <i class="menu-icon tf-icons bx bx-file"></i>
             <div>Dokumentasi</div>
-        </a>
-    </li>
-    <li class="menu-item {{ Request::is('pengaturan') ? 'active' : '' }}">
-        <a class="menu-link cursor-pointer" onclick="window.location.href='/pengaturan'">
-            <i class="menu-icon tf-icons bx bx-cog"></i>
-            <div>Pengaturan</div>
         </a>
     </li>
 @endcan
