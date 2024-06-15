@@ -26,12 +26,11 @@
                     <i class='bx bx-message-dots fs-6'></i>&nbsp;TAMBAH THREAD
                 </button>
             </div>
-            <div>
+            <div class="justify-content-end">
                 <form action="/view/discuss/search">
                     <div class="input-group">
                         <input type="search" class="form-control" name="q" id="search"
-                            style="border: 1px solid #d9dee3; width:300px" placeholder="Cari Topik Diskusi..."
-                            autocomplete="off" />
+                            style="border: 1px solid #d9dee3;" placeholder="Cari Topik Diskusi..." autocomplete="off" />
                     </div>
                 </form>
             </div>
