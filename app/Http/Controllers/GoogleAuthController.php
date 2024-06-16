@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
-use Illuminate\Support\Facades\Validator;
 
 class GoogleAuthController extends Controller
 {
@@ -24,9 +22,9 @@ class GoogleAuthController extends Controller
             if (!$user) {
                 // Unduh gambar profil dari URL yang diberikan oleh Google
                 $imagePath = 'profil-images/';
-                $imageName = uniqid() . '.jpg'; // Atau format file yang sesuai
+                $imageName = uniqid() . '.jpg';
                 $imageContent = file_get_contents($google_user->getAvatar());
-                // Simpan gambar di direktori penyimpanan yang sesuai
+                // Simpan gambar di direktori "storage/profile-images"
                 file_put_contents(public_path('storage/' . $imagePath . $imageName), $imageContent);
 
                 // Pisahkan nama pengguna menjadi kata-kata terpisah
