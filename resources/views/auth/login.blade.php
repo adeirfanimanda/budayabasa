@@ -115,7 +115,7 @@
                             </div>
                         </form>
                         <div class="mb-3 divBtn">
-                            <a href="{{ route('gooogle-auth') }}" class="btn btn-light w-100">
+                            <a href="{{ route('google-auth') }}" class="btn btn-light w-100">
                                 <img src="/assets/img/google.png" alt="Google Logo" class="google-logo">
                                 Masuk atau Daftar
                             </a>
