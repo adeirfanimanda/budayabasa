@@ -117,6 +117,20 @@
                         <div><strong>Krama (Bebasan) :</strong> {{ $dictionary->krama }}</div>
                         <div><strong>Bahasa Indonesia :</strong> {{ $dictionary->indonesian }}</div>
                         <div><strong>Contoh Kalimat :</strong> {{ $dictionary->example }}</div>
+                        @if ($dictionary->audio)
+                            <div style="display: flex; align-items: center;">
+                                <strong style="margin-right: 10px;">Audio :</strong>
+                                @if (Auth::check())
+                                    <audio controls>
+                                        <source
+                                            src="@if (Storage::disk('public')->exists($dictionary->audio)) {{ asset('storage/' . $dictionary->audio) }} @else {{ asset('assets/' . $dictionary->audio) }} @endif"
+                                            type="audio/mpeg">
+                                    </audio>
+                                @else
+                                    [Informasi audio hanya tersedia bagi pengguna terdaftar]
+                                @endif
+                            </div>
+                        @endif
                     </div>
                 @endforeach
                 @if ($dictionaries->isEmpty())
@@ -124,11 +138,6 @@
                         <strong>"{{ request('q') }}"</strong>
                     </div>
                 @endif
-                {{-- @if (!$dictionaries->isEmpty())
-                    <div class="mt-3 pagination-mobile">
-                        {{ $dictionaries->withQueryString()->onEachSide(1)->links() }}
-                    </div>
-                @endif --}}
             </div>
         </div>
     </section>
