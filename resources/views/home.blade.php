@@ -147,22 +147,22 @@
                 <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
                     <div class="block-18">
                         <div class="text"><strong class="number"
-                                data-number="{{ $users }}">0</strong><span>Total Pengguna</span></div>
-                    </div>
-                </div>
-                <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-                    <div class="block-18">
-                        <div class="text"><strong class="number"
-                                data-number="{{ $quizzes }}">{{ $quizzes }}</strong><span>Total
-                                Latihan</span>
+                                data-number="{{ $dictionaries }}">{{ $dictionaries }}</strong><span>Total
+                                Kosa Kata</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
                     <div class="block-18">
                         <div class="text"><strong class="number"
-                                data-number="{{ $threads }}">{{ $threads }}</strong><span>Threads
-                                Forum</span></div>
+                                data-number="{{ $users }}">0</strong><span>Total Pengguna</span></div>
+                    </div>
+                </div>
+                <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+                    <div class="block-18">
+                        <div class="text"><strong class="number"
+                                data-number="{{ $materials }}">{{ $materials }}</strong><span>Total
+                                Materi</span></div>
                     </div>
                 </div>
             </div>
@@ -353,7 +353,7 @@
                         <h2 class="ftco-heading-2">Layanan</h2>
                         <ul class="list-unstyled">
                             <li>
-                                <a href="/materi">
+                                <a href="/kamus">
                                     <span class="bx bx-right-arrow-alt mr-2"></span>
                                     Audio Bahasa Indramayu
                                 </a>
