@@ -41,11 +41,11 @@
             @foreach ($threads as $thread)
                 <div class="col-md-12 col-xl-12">
                     <div class="card h-100 shadow-none border">
-                        <div class="card-header flex-grow-0">
+                        <div class="card-header p-3 flex-grow-0">
                             <div class="d-flex">
-                                <div class="avatar flex-shrink-0 me-3">
+                                <div class="avatar flex-shrink-0 me-2">
                                     <img src="@if (Storage::disk('public')->exists($thread->user->image)) {{ asset('storage/' . $thread->user->image) }} @else {{ asset('assets/img/' . $thread->user->image) }} @endif"
-                                        alt="Author" class="rounded-circle">
+                                        alt="Author" class="rounded-circle" style="width: 90%; height: 90%;">
                                 </div>
                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-1">
                                     <div class="me-2">
@@ -79,12 +79,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body p-3 pt-0">
                             <h5 class="text-truncate text-capitalize cursor-pointer"
                                 onclick="window.location.href='/view/discuss/thread/{{ $thread->id }}'">
                                 {{ $thread->title }}
                             </h5>
-                            <div class="d-flex mt-4 align-items-center justify-content-between">
+                            <div class="d-flex align-items-center justify-content-between">
                                 <div class="card-actions">
                                     @php
                                         $userLiked = false;
