@@ -26,11 +26,11 @@
                     <i class='bx bx-message-dots fs-6'></i>&nbsp;TAMBAH THREAD
                 </button>
             </div>
-            <div>
+            <div class="justify-content-end">
                 <form action="/view/discuss/search">
                     <div class="input-group">
                         <input type="search" class="form-control" name="q" id="search"
-                            value="{{ request('q') }}" style="border: 1px solid #d9dee3; width:300px"
+                            value="{{ request('q') }}" style="border: 1px solid #d9dee3;"
                             placeholder="Cari Topik Diskusi..." autocomplete="off" />
                     </div>
                 </form>
@@ -38,27 +38,28 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="row gy-4 mb-4">
+        <div class="row gy-3 mb-4">
             @foreach ($threads as $thread)
-                <div class="col-md-6 col-xl-4">
+                <div class="col-md-12 col-xl-12">
                     <div class="card h-100 shadow-none border">
-                        <div class="card-header flex-grow-0">
+                        <div class="card-header p-3 flex-grow-0">
                             <div class="d-flex">
-                                <div class="avatar flex-shrink-0 me-3">
+                                <div class="avatar flex-shrink-0 me-2">
                                     <img src="@if (Storage::disk('public')->exists($thread->user->image)) {{ asset('storage/' . $thread->user->image) }} @else {{ asset('assets/img/' . $thread->user->image) }} @endif"
-                                        alt="Author" class="rounded-circle">
+                                        alt="Author" class="rounded-circle" style="width: 90%; height: 90%;">
                                 </div>
                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-1">
                                     <div class="me-2">
-                                        <h5 class="mb-0 fw-semibold">{{ $thread->user->name }}@if ($thread->user->is_admin)
+                                        <h6 class="mb-0 fw-semibold">{{ $thread->user->name }}@if ($thread->user->is_admin)
                                                 <i class='bx bxs-badge-check text-primary fs-6'
                                                     style="margin-bottom: 1px;" data-bs-toggle="tooltip"
                                                     data-popup="tooltip-custom" data-bs-placement="right"
                                                     title="Administrator"></i>
                                             @endif
-                                        </h5>
+                                        </h6>
                                         <small class="text-muted">Dipost
-                                            {{ $thread->created_at->locale('id')->diffForHumans() }}</small>
+                                            {{ $thread->created_at->locale('id')->diffForHumans() }}
+                                        </small>
                                     </div>
                                     @if ($thread->user->id == auth()->user()->id)
                                         <div class="dropdown">
@@ -69,19 +70,21 @@
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <a class="dropdown-item cursor-pointer button-delete-topic"
                                                     data-message-topic="{{ $thread->title }}"
-                                                    data-code="{{ encrypt($thread->id) }}"><i
-                                                        class='bx bx-trash fs-5 mb-1 me-2'></i>Hapus</a>
+                                                    data-code="{{ encrypt($thread->id) }}">
+                                                    <i class='bx bx-trash fs-5 mb-1 me-2'></i>Hapus
+                                                </a>
                                             </div>
                                         </div>
                                     @endif
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <h1 class="text-truncate text-capitalize cursor-pointer" style="font-size: 1rem;"
+                        <div class="card-body p-3 pt-0">
+                            <h5 class="text-truncate text-capitalize cursor-pointer"
                                 onclick="window.location.href='/view/discuss/thread/{{ $thread->id }}'">
-                                {{ $thread->title }}</h1>
-                            <div class="d-flex mt-4 align-items-center justify-content-between">
+                                {{ $thread->title }}
+                            </h5>
+                            <div class="d-flex align-items-center justify-content-between">
                                 <div class="card-actions">
                                     @php
                                         $userLiked = false;
@@ -108,14 +111,17 @@
                                             </a>
                                         </div>
                                         <a onclick="window.location.href='/view/discuss/thread/{{ $thread->id }}#comments'"
-                                            class="text-muted cursor-pointer"><i class="bx bx-chat me-1"
-                                                style="margin-bottom: 1px;"></i> {{ $thread->comment->count() }}</a>
+                                            class="text-muted cursor-pointer">
+                                            <i class="bx bx-chat me-1" style="margin-bottom: 1px;"></i>
+                                            {{ $thread->comment->count() }}
+                                        </a>
                                     </div>
                                 </div>
                                 <div>
                                     <a style="font-size: 0.875rem;"
-                                        href="/view/discuss/thread/{{ $thread->id }}">Lihat Detail <i
-                                            class='bx bx-right-arrow-alt mb-1'></i></a>
+                                        href="/view/discuss/thread/{{ $thread->id }}">Lihat Detail
+                                        <i class='bx bx-right-arrow-alt mb-1'></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
