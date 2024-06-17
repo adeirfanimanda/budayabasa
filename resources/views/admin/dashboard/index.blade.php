@@ -12,7 +12,7 @@
                     <div class="avatar me-2">
                         <span class="avatar-initial rounded bg-label-primary"><i class="bx bx-group"></i></span>
                     </div>
-                    <h4 class="ms-1 mb-0">{{ $totalMember }}</h4>
+                    <h4 class="ms-1 mb-0">{{ number_format($totalMember, 0, ',', '.') }}</h4>
                 </div>
                 <p class="mb-1 fw-semibold">Total Pengguna</p>
             </div>
@@ -23,11 +23,11 @@
             <div class="card-body">
                 <div class="d-flex align-items-center mb-2 pb-1">
                     <div class="avatar me-2">
-                        <span class="avatar-initial rounded bg-label-warning"><i class='bx bx-joystick'></i></span>
+                        <span class="avatar-initial rounded bg-label-warning"><i class='bx bx-book'></i></span>
                     </div>
-                    <h4 class="ms-1 mb-0">{{ $totalQuiz }}</h4>
+                    <h4 class="ms-1 mb-0">{{ number_format($totalDictionary, 0, ',', '.') }}</h4>
                 </div>
-                <p class="mb-1 fw-semibold">Total Latihan</p>
+                <p class="mb-1 fw-semibold">Total Kosa Kata</p>
             </div>
         </div>
     </div>
@@ -36,11 +36,11 @@
             <div class="card-body">
                 <div class="d-flex align-items-center mb-2 pb-1">
                     <div class="avatar me-2">
-                        <span class="avatar-initial rounded bg-label-success"><i class='bx bx-receipt'></i></span>
+                        <span class="avatar-initial rounded bg-label-success"><i class='bx bx-book-content'></i></span>
                     </div>
-                    <h4 class="ms-1 mb-0">{{ $answersQuiz }}</h4>
+                    <h4 class="ms-1 mb-0">{{ number_format($totalMaterial, 0, ',', '.') }}</h4>
                 </div>
-                <p class="mb-1 fw-semibold">Jawab Latihan</p>
+                <p class="mb-1 fw-semibold">Total Materi</p>
             </div>
         </div>
     </div>
@@ -51,7 +51,7 @@
                     <div class="avatar me-2">
                         <span class="avatar-initial rounded bg-label-info"><i class='bx bx-conversation'></i></span>
                     </div>
-                    <h4 class="ms-1 mb-0">{{ $threads }}</h4>
+                    <h4 class="ms-1 mb-0">{{ number_format($threads, 0, ',', '.') }}</h4>
                 </div>
                 <p class="mb-1 fw-semibold">Threads Forum</p>
             </div>
