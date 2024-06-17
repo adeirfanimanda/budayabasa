@@ -26,12 +26,10 @@ class AnswerQuizChart
             $totalUserPerempuan[] = $totalUsers->where('user.gender', 'Perempuan')->count();
         }
         return $this->chart->lineChart()
-            ->setTitle('Data Akses Quiz')
-            ->setSubtitle('Total pengguna yang menjawab Quiz tahun ' . date('Y'))
+            ->setTitle('Data Akses Latihan')
+            ->setSubtitle('Total pengguna yang menjawab Latihan tahun ' . date('Y'))
             ->addData('Laki-Laki', $totalUserLakiLaki)
             ->addData('Perempuan', $totalUserPerempuan)
-            // ->addData('Laki-Laki', [4, 1, 3, 9, 7, 5, 3, 6, 3, 5, 9])
-            // ->addData('Perempuan', [3, 2, 7, 3, 4, 8, 5, 6, 1, 6, 2])
             ->setXAxis($dataBulan)
             ->setFontFamily('Poppins')
             ->setFontColor('#566a7f')
