@@ -123,15 +123,6 @@ Route::middleware('admin')->prefix('admin')->group(function () {
         Route::post('/delete/{quiz:slug}', [AdminDataQuizController::class, 'destroy']);
         Route::get('/delete/{quiz:slug}', fn () => back());
         Route::get('/update', fn () => back());
-        Route::prefix('q&a/{quiz:slug}')->group(function () {
-            Route::get('/', [AdminDataQuizController::class, 'show']);
-            Route::post('/', [AdminDataQuizController::class, 'addquestion']);
-            Route::post('/delete/{question:id}', [AdminDataQuizController::class, 'destroyquestion']);
-            Route::get('/delete/{question:id}', fn () => back());
-            Route::post('/update/question', [AdminDataQuizController::class, 'updatequestion']);
-            Route::get('/update/question', fn () => back());
-            Route::get('/search', [AdminDataQuizController::class, 'searchquestion']);
-        });
     });
     Route::prefix('pengaturan')->group(function () {
         Route::get('/', [AdminPengaturanController::class, 'index']);
@@ -164,7 +155,19 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     });
 });
 
+// admin quiz > q&a
+Route::get('/admin/data-quiz/q&a/{quiz:slug}', [AdminDataQuizController::class, 'show'])->middleware('admin');
+Route::post('/admin/data-quiz/q&a/{quiz:slug}', [AdminDataQuizController::class, 'addquestion'])->middleware('admin');
+Route::post('/admin/data-quiz/q&a/delete/{question:id}', [AdminDataQuizController::class, 'destroyquestion'])->middleware('admin');
 Route::post('/admin/data-quiz/getanswer', [AdminDataQuizController::class, 'getanswer'])->middleware('admin');
+Route::get('/admin/data-quiz/q&a/delete/{question:id}', function () {
+    return back();
+})->middleware('admin');
+Route::post('/admin/data-quiz/q&a/update/question', [AdminDataQuizController::class, 'updatequestion'])->middleware('admin');
+Route::get('/admin/data-quiz/q&a/update/question', function () {
+    return back();
+})->middleware('admin');
+Route::get('/admin/data-quiz/q&a/{quiz:slug}/search', [AdminDataQuizController::class, 'searchquestion'])->middleware('admin');
 
 // Access Admin & Member
 // Discuss Thread
