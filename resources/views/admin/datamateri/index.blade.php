@@ -101,7 +101,7 @@
                                         </td>
                                         <td class="text-center">
                                             <button type="button"
-                                                class="btn btn-icon btn-warning btn-sm buttonEditMateri"
+                                                class="btn btn-icon btn-primary btn-sm buttonEditMateri"
                                                 data-bs-toggle="tooltip" data-popup="tooltip-custom"
                                                 data-bs-placement="auto" title="Edit Materi"
                                                 data-code-materi="{{ encrypt($material->id) }}"

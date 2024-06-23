@@ -46,7 +46,7 @@ class MaterialController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|max:255|string',
-            'description' => 'required|max:255|min:100|string',
+            'description' => 'required|max:255|string',
             'document' => 'required|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx|max:5000',
         ]);
 
@@ -66,7 +66,7 @@ class MaterialController extends Controller
     {
         $validatedData = $request->validate([
             'titleEdit' => 'required|max:255|string',
-            'descriptionEdit' => 'required|max:255|min:100|string',
+            'descriptionEdit' => 'required|max:255|string',
             'documentEdit' => 'mimes:pdf,doc,docx,xls,xlsx,ppt,pptx|max:5000',
             'status' => 'required|in:Aktif,Nonaktif',
         ], [
