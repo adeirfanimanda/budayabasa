@@ -127,7 +127,6 @@ Route::middleware('admin')->prefix('admin')->group(function () {
             Route::get('/', [AdminDataQuizController::class, 'show']);
             Route::post('/', [AdminDataQuizController::class, 'addquestion']);
             Route::post('/delete/{question:id}', [AdminDataQuizController::class, 'destroyquestion']);
-            Route::post('/getanswer', [AdminDataQuizController::class, 'getanswer']);
             Route::get('/delete/{question:id}', fn () => back());
             Route::post('/update/question', [AdminDataQuizController::class, 'updatequestion']);
             Route::get('/update/question', fn () => back());
@@ -164,6 +163,8 @@ Route::middleware('admin')->prefix('admin')->group(function () {
         Route::get('/{quiz:slug}/search', [AdminLaporanController::class, 'searchAccess']);
     });
 });
+
+Route::post('/admin/data-quiz/getanswer', [AdminDataQuizController::class, 'getanswer'])->middleware('admin');
 
 // Access Admin & Member
 // Discuss Thread
