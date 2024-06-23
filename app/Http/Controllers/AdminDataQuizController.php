@@ -26,7 +26,7 @@ class AdminDataQuizController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|max:255',
-            'description' => 'required|max:255|min:100',
+            'description' => 'required|max:255',
         ]);
 
         $validated['slug'] = encrypt(date('Y-m-d H i s'));
@@ -114,7 +114,7 @@ class AdminDataQuizController extends Controller
     {
         $validated = $request->validate([
             'titleQuiz' => 'required|max:255',
-            'descriptionQuiz' => 'required|max:255|min:100',
+            'descriptionQuiz' => 'required|max:255',
             'status' => 'required|in:Aktif,Nonaktif',
         ], [
             'titleQuiz.required' => 'The title field is required.',
