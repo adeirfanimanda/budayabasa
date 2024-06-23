@@ -47,7 +47,7 @@ class MaterialController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|max:255|string',
             'description' => 'required|max:255|string',
-            'document' => 'required|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx|max:5000',
+            'document' => 'required|mimes:pdf,doc,docx|max:20000',
         ]);
 
         $validatedData['status'] = "Nonaktif";
@@ -67,15 +67,15 @@ class MaterialController extends Controller
         $validatedData = $request->validate([
             'titleEdit' => 'required|max:255|string',
             'descriptionEdit' => 'required|max:255|string',
-            'documentEdit' => 'mimes:pdf,doc,docx,xls,xlsx,ppt,pptx|max:5000',
+            'documentEdit' => 'mimes:pdf,doc,docx|max:20000',
             'status' => 'required|in:Aktif,Nonaktif',
         ], [
             'titleEdit.required' => 'The title field is required.',
             'titleEdit.max' => 'The title field must not be greater than 255 characters.',
             'descriptionEdit.required' => 'The description field is required.',
             'descriptionEdit.max' => 'The description field must not be greater than 255 characters.',
-            'documentEdit.max' => 'The document field must not be greater than 5000 kilobytes.',
-            'documentEdit.mimes' => 'The document field must be a file of type: pdf,doc,docx,xls,xlsx,ppt,pptx',
+            'documentEdit.max' => 'The document field must not be greater than 20000 kilobytes.',
+            'documentEdit.mimes' => 'The document field must be a file of type: pdf,doc,docx',
         ]);
 
         if ($request->file('documentEdit')) {

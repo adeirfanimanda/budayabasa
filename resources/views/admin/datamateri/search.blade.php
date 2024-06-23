@@ -198,7 +198,7 @@
                                 </div>
                             @enderror
                             <div class="form-text @error('document') d-none @enderror">
-                                Ukuran maks 5000 KB. Format: PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX.
+                                Ukuran maks 20 MB. Format: PDF, DOC, DOCX.
                             </div>
                         </div>
                     </div>
@@ -274,7 +274,7 @@
                                 </div>
                             @enderror
                             <div class="form-text @error('documentEdit') d-none @enderror">
-                                Ukuran maks 5000 KB. Format: PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX.
+                                Ukuran maks 20 MB. Format: PDF, DOC, DOCX.
                             </div>
                         </div>
                     </div>
