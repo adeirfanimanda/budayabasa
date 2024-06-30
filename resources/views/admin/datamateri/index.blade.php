@@ -151,7 +151,7 @@
             @csrf
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between">
-                    <h5 class="modal-title text-primary fw-bold">Buat Materi Baru&nbsp;<i
+                    <h5 class="modal-title text-primary fw-bold">Tambah Materi Baru&nbsp;<i
                             class='bx bx-book-content fs-5' style="margin-bottom: 1px;"></i></h5>
                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow cancelModalAddMateri"
                         data-bs-dismiss="modal"><i class="bx bx-x-circle text-danger fs-4" data-bs-toggle="tooltip"

@@ -144,7 +144,7 @@
             @csrf
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between">
-                    <h5 class="modal-title text-primary fw-bold">Buat Latihan Baru&nbsp;<i class='bx bx-joystick fs-5'
+                    <h5 class="modal-title text-primary fw-bold">Tambah Latihan Baru&nbsp;<i class='bx bx-joystick fs-5'
                             style="margin-bottom: 1px;"></i></h5>
                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow cancelModalAddQuiz"
                         data-bs-dismiss="modal"><i class="bx bx-x-circle text-danger fs-4" data-bs-toggle="tooltip"
