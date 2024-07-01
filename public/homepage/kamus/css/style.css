@@ -3,35 +3,70 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-span {
-    color: #14193F;
-}
-
 .navbar.navbar-dark {
     background-color: #F5F5F9 !important;
 }
 
-.navbar-nav .nav-link {
-    color: #14193F !important;
+.navbar-nav .nav-link span {
+    color: #232631;
     font-weight: 500 !important;
+}
+
+.navbar-nav .nav-link.active span {
+    color: #696CFF;
+    font-weight: 500 !important;
+}
+
+.oi-menu {
+    color: #232631;
+}
+
+.section-ftco {
+    margin-top: 150px;
+}
+
+.heading-section h2 {
+    color: #232631;
+}
+
+.heading-section p {
+    color: #7B7B7B;
+}
+
+.search-index {
+    margin-top: -40px;
+}
+
+.form-control {
+    border: 1px solid #d9dee3;
+}
+
+.error-message-icon {
+    color: red;
+    font-size: 1.2em;
+    vertical-align: middle;
+}
+
+.error-message-text {
+    color: red;
 }
 
 .dictionary-entry {
     padding: 15px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #d9dee3;
     border-radius: 5px;
     margin-bottom: 15px;
-    background-color: #fff;
-}
-
-.dictionary-entry strong {
-    font-weight: 600;
-    color: #14193F;
+    background-color: white;
 }
 
 .dictionary-entry div {
     margin-bottom: 5px;
-    color: #333333;
+    color: #7B7B7B;
+}
+
+.dictionary-entry strong {
+    font-weight: 600;
+    color: #232631;
 }
 
 .dictionary-entry .audio-container {
@@ -41,6 +76,14 @@ span {
 
 .dictionary-entry .audio-container strong {
     margin-right: 10px;
+}
+
+.footer {
+    margin-top: 200px;
+}
+
+.footer-text {
+    color: #7B7B7B;
 }
 
 @media screen and (min-width:1000px) {

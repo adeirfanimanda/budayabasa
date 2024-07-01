@@ -52,32 +52,32 @@
                     </li>
                     <li class="nav-item">
                         <a href="#kbbi" class="nav-link">
-                            <span style="color: #696CFF">Kamus</span>
+                            <span>Kamus</span>
                         </a>
                     </li>
                     @if (Auth::check())
                         @if (auth()->user()->is_admin)
                             <li class="nav-item">
                                 <a href="/admin/dashboard" class="nav-link">
-                                    <span><i class="bx bx-desktop" style="font-size:16px"></i>&nbsp;Dashboard</span>
+                                    <span><i class="bx bx-desktop"></i>&nbsp;Dashboard</span>
                                 </a>
                             </li>
                         @else
                             <li class="nav-item">
                                 <a href="/materi" class="nav-link">
-                                    <span><i class="bx bx-book-content" style="font-size:16px"></i>&nbsp;Materi</span>
+                                    <span><i class="bx bx-book-content"></i>&nbsp;Materi</span>
                                 </a>
                             </li>
                         @endif
                     @else
                         <li class="nav-item">
                             <a href="/login" class="nav-link">
-                                <span><i class="bx bx-log-in-circle" style="font-size:16px"></i>&nbsp;Masuk</span>
+                                <span><i class="bx bx-log-in-circle"></i>&nbsp;Masuk</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/register" class="nav-link">
-                                <span><i class="bx bx-user" style="font-size:16px"></i>&nbsp;Daftar</span>
+                                <span><i class="bx bx-user"></i>&nbsp;Daftar</span>
                             </a>
                         </li>
                     @endif
@@ -88,30 +88,32 @@
     {{-- End Navbar --}}
 
     {{-- Content --}}
-    <section class="ftco-section ftco-no-pb" id="kbbi" style="margin-top: 150px;">
+    <section class="ftco-section ftco-no-pb section-ftco" id="kbbi">
         <div class="container">
             <div class="row justify-content-center pb-5">
                 <div class="col-md-10 heading-section text-center ftco-animate">
-                    <h2 style="color: #14193F" class="mb-2">Selamat datang di Kamus Bahasa Indramayu</h2>
+                    <h2 class="mb-2">Selamat datang di Kamus Bahasa Indramayu</h2>
                     <p>Pemutakhiran terakhir: <strong>01 Januari 2024</strong></p>
                 </div>
             </div>
-            <div class="justify-content-center" style="margin-top: -40px;">
+
+            <!-- /Search -->
+            <div class="justify-content-center">
                 <div class="justify-content-end">
                     <form action="/kamus/search">
-                        <div class="input-group">
+                        <div class="input-group search-index">
                             <input type="search" class="form-control" name="q" id="search"
-                                style="border: 1px solid #d9dee3;" placeholder="Pencarian..." autocomplete="off" />
+                                placeholder="Pencarian..." autocomplete="off" />
                         </div>
                     </form>
                 </div>
-                <!-- /Search -->
             </div>
+            <!-- /Search -->
 
-            {{-- Footer --}}
-            <footer class="content-footer footer bg-footer-theme" style="margin-top: 200px">
+            <!-- Footer -->
+            <footer class="content-footer footer">
                 <div class="d-flex justify-content-center align-items-center py-2 flex-md-row flex-column">
-                    <div class="mb-2 mb-md-0">&copy;
+                    <div class="footer-text mb-2 mb-md-0">&copy;
                         <script>
                             document.write(new Date().getFullYear());
                         </script>&nbsp;<a href="/" target="_blank"
@@ -119,7 +121,7 @@
                     </div>
                 </div>
             </footer>
-            {{-- /Footer --}}
+            <!-- /Footer -->
         </div>
     </section>
     {{-- /Content --}}

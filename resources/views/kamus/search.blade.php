@@ -51,32 +51,32 @@
                     </li>
                     <li class="nav-item">
                         <a href="#kamus" class="nav-link">
-                            <span style="color: #696CFF">Kamus</span>
+                            <span>Kamus</span>
                         </a>
                     </li>
                     @if (Auth::check())
                         @if (auth()->user()->is_admin)
                             <li class="nav-item">
                                 <a href="/admin/dashboard" class="nav-link">
-                                    <span><i class="bx bx-desktop" style="font-size:16px"></i>&nbsp;Dashboard</span>
+                                    <span><i class="bx bx-desktop"></i>&nbsp;Dashboard</span>
                                 </a>
                             </li>
                         @else
                             <li class="nav-item">
                                 <a href="/materi" class="nav-link">
-                                    <span><i class="bx bx-book-content" style="font-size:16px"></i>&nbsp;Materi</span>
+                                    <span><i class="bx bx-book-content"></i>&nbsp;Materi</span>
                                 </a>
                             </li>
                         @endif
                     @else
                         <li class="nav-item">
                             <a href="/login" class="nav-link">
-                                <span><i class="bx bx-log-in-circle" style="font-size:16px"></i>&nbsp;Masuk</span>
+                                <span><i class="bx bx-log-in-circle"></i>&nbsp;Masuk</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/register" class="nav-link">
-                                <span><i class="bx bx-user" style="font-size:16px"></i>&nbsp;Daftar</span>
+                                <span><i class="bx bx-user"></i>&nbsp;Daftar</span>
                             </a>
                         </li>
                     @endif
@@ -94,8 +94,7 @@
                     <form action="/kamus/search">
                         <div class="input-group">
                             <input type="search" class="form-control" value="{{ request('q') }}" name="q"
-                                id="search" style="border: 1px solid #d9dee3;" placeholder="Pencarian.."
-                                autocomplete="off" />
+                                id="search" placeholder="Pencarian.." autocomplete="off" />
                         </div>
                     </form>
                 </div>
@@ -130,9 +129,9 @@
                     @endforeach
                 </div>
                 @if ($dictionaries->isEmpty())
-                    <div style="text-align: center;">
-                        <i class="bx bx-error" style="color: red; font-size: 1.2em; vertical-align: middle;"></i>
-                        <span style="color: red">
+                    <div class="text-center">
+                        <i class="bx bx-error error-message-icon"></i>
+                        <span class="error-message-text">
                             Entri tidak ditemukan dengan kata kunci pencarian:
                             <strong>"{{ request('q') }}"</strong>
                         </span>
@@ -167,19 +166,6 @@
     <script src="{{ asset('homepage/js/jquery.animateNumber.min.js') }}"></script>
     <script src="{{ asset('homepage/js/scrollax.min.js') }}"></script>
     <script src="{{ asset('homepage/js/main.js') }}"></script>
-    {{-- <script>
-        window.addEventListener('scroll', function() {
-            var navbar = document.getElementById('ftco-navbar');
-            var logo = navbar.querySelector('img');
-
-            // Ubah logo ketika scroll melebihi 100px dari atas
-            if (window.scrollY > 100) {
-                logo.src = '/homepage/images/logo-light.svg';
-            } else {
-                logo.src = '/homepage/images/logo-dark.svg';
-            }
-        });
-    </script> --}}
 </body>
 
 </html>
