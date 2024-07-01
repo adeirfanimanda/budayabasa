@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     <link rel="icon" type="image/x-icon"
-        href="@if (Storage::disk('public')->exists('logo-aplikasi')) {{ asset('storage/' . $app->logo) }} @else {{ asset('assets/img/logo-aplikasi/logo.svg') }} @endif">
+        href="{{ Storage::disk('public')->exists('logo-aplikasi') ? asset('storage/' . $app->logo) : asset('assets/img/logo-aplikasi/logo.svg') }}">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('homepage/css/open-iconic-bootstrap.min.css') }}">
@@ -16,19 +16,9 @@
     <link rel="stylesheet" href="{{ asset('homepage/css/magnific-popup.css') }}">
     <link rel="stylesheet" href="{{ asset('homepage/css/aos.css') }}">
     <link rel="stylesheet" href="{{ asset('homepage/css/style.css') }}">
-    <style>
-        @media screen and (min-width:1000px) {
-            .height-300 {
-                height: 270px
-            }
-        }
 
-        @media screen and (min-width:768px) and (max-width:1000px) {
-            .height-300 {
-                height: 400px
-            }
-        }
-    </style>
+    {{-- Style Kamus --}}
+    <link rel="stylesheet" href="{{ asset('homepage/kamus/css/style.css') }}">
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -36,7 +26,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <img src="{{ asset('homepage/images/logo-light.svg') }}" alt="Logo">
+                <img src="{{ asset('homepage/images/logo-dark.svg') }}" alt="Logo">
             </a>
             <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse"
                 data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -110,31 +100,39 @@
                     </form>
                 </div>
                 <br>
-                @foreach ($dictionaries as $index => $dictionary)
-                    <div class="mb-3">
-                        <div><strong>{{ $loop->iteration }}</strong></div>
-                        <div><strong>Ngoko (Sehari-hari) :</strong> {{ $dictionary->ngoko }}</div>
-                        <div><strong>Krama (Bebasan) :</strong> {{ $dictionary->krama }}</div>
-                        <div><strong>Bahasa Indonesia :</strong> {{ $dictionary->indonesian }}</div>
-                        <div><strong>Contoh Kalimat :</strong> {{ $dictionary->example }}</div>
-                        @if ($dictionary->audio)
-                            <div style="display: flex; align-items: center;">
-                                <strong style="margin-right: 10px;">Audio :</strong>
-                                @if (Auth::check())
-                                    <audio controls>
-                                        <source
-                                            src="@if (Storage::disk('public')->exists($dictionary->audio)) {{ asset('storage/' . $dictionary->audio) }} @else {{ asset('assets/' . $dictionary->audio) }} @endif"
-                                            type="audio/mpeg">
-                                    </audio>
-                                @else
-                                    [Informasi audio hanya tersedia bagi pengguna terdaftar]
-                                @endif
-                            </div>
-                        @endif
-                    </div>
-                @endforeach
+                <div class="">
+                    @foreach ($dictionaries as $index => $dictionary)
+                        <div class="dictionary-entry">
+                            @if (count($dictionaries) > 1)
+                                <div><strong>Entri {{ $index + 1 }}</strong></div>
+                            @endif
+                            <div><strong>Ngoko (Sehari-hari):</strong> {{ $dictionary->ngoko }}</div>
+                            <div><strong>Krama (Bebasan):</strong> {{ $dictionary->krama }}</div>
+                            <div><strong>Bahasa Indonesia:</strong> {{ $dictionary->indonesian }}</div>
+                            @if ($dictionary->example)
+                                <div><strong>Contoh Kalimat:</strong> {{ $dictionary->example }}</div>
+                            @endif
+                            @if ($dictionary->audio)
+                                <div class="audio-container">
+                                    <strong>Audio:</strong>
+                                    @if (Auth::check())
+                                        <audio controls>
+                                            <source
+                                                src="@if (Storage::disk('public')->exists($dictionary->audio)) {{ asset('storage/' . $dictionary->audio) }} @else {{ asset('assets/' . $dictionary->audio) }} @endif"
+                                                type="audio/mpeg">
+                                        </audio>
+                                    @else
+                                        [Informasi audio hanya tersedia bagi pengguna terdaftar]
+                                    @endif
+                                </div>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
                 @if ($dictionaries->isEmpty())
-                    <div class="mt-3 text-center">Data tidak ditemukan dengan keyword pencarian:
+                    <div style="color: red" class="text-center d-flex justify-content-center align-items-center">
+                        <i class='bx bx-error' style="margin-right: 4px;"></i>
+                        Entri tidak ditemukan dengan kata kunci pencarian:
                         <strong>"{{ request('q') }}"</strong>
                     </div>
                 @endif
@@ -167,6 +165,19 @@
     <script src="{{ asset('homepage/js/jquery.animateNumber.min.js') }}"></script>
     <script src="{{ asset('homepage/js/scrollax.min.js') }}"></script>
     <script src="{{ asset('homepage/js/main.js') }}"></script>
+    <script>
+        window.addEventListener('scroll', function() {
+            var navbar = document.getElementById('ftco-navbar');
+            var logo = navbar.querySelector('img');
+
+            // Ubah logo ketika scroll melebihi 100px dari atas
+            if (window.scrollY > 100) {
+                logo.src = '/homepage/images/logo-light.svg';
+            } else {
+                logo.src = '/homepage/images/logo-dark.svg';
+            }
+        });
+    </script>
 </body>
 
 </html>

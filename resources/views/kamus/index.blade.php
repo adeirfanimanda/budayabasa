@@ -17,19 +17,9 @@
     <link rel="stylesheet" href="{{ asset('homepage/css/magnific-popup.css') }}">
     <link rel="stylesheet" href="{{ asset('homepage/css/aos.css') }}">
     <link rel="stylesheet" href="{{ asset('homepage/css/style.css') }}">
-    <style>
-        @media screen and (min-width:1000px) {
-            .height-300 {
-                height: 270px
-            }
-        }
 
-        @media screen and (min-width:768px) and (max-width:1000px) {
-            .height-300 {
-                height: 400px
-            }
-        }
-    </style>
+    {{-- Style Kamus --}}
+    <link rel="stylesheet" href="{{ asset('homepage/kamus/css/style.css') }}">
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -37,7 +27,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <img src="{{ asset('homepage/images/logo-light.svg') }}" alt="Logo">
+                <img src="{{ asset('homepage/images/logo-dark.svg') }}" alt="Logo">
             </a>
             <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse"
                 data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -102,7 +92,7 @@
         <div class="container">
             <div class="row justify-content-center pb-5">
                 <div class="col-md-10 heading-section text-center ftco-animate">
-                    <h2 class="mb-2">Selamat datang di Kamus Bahasa Indramayu</h2>
+                    <h2 style="color: #14193F" class="mb-2">Selamat datang di Kamus Bahasa Indramayu</h2>
                     <p>Pemutakhiran terakhir: <strong>01 Januari 2024</strong></p>
                 </div>
             </div>

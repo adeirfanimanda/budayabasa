@@ -1,0 +1,52 @@
+body {
+    background-color: #F5F5F9;
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar-nav .nav-link {
+    color: #14193F !important;
+    font-weight: 500 !important;
+}
+
+.navbar-nav .nav-link.active {
+    color: #696CFF !important;
+}
+
+.dictionary-entry {
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    background-color: #fff;
+}
+
+.dictionary-entry strong {
+    font-weight: 600;
+    color: #14193F;
+}
+
+.dictionary-entry div {
+    margin-bottom: 5px;
+    color: #333333;
+}
+
+.dictionary-entry .audio-container {
+    display: flex;
+    align-items: center;
+}
+
+.dictionary-entry .audio-container strong {
+    margin-right: 10px;
+}
+
+@media screen and (min-width:1000px) {
+    .height-300 {
+        height: 270px
+    }
+}
+
+@media screen and (min-width:768px) and (max-width:1000px) {
+    .height-300 {
+        height: 400px
+    }
+}
