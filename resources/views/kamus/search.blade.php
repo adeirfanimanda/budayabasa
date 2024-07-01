@@ -130,10 +130,12 @@
                     @endforeach
                 </div>
                 @if ($dictionaries->isEmpty())
-                    <div style="color: red" class="text-center d-flex justify-content-center align-items-center">
-                        <i class='bx bx-error' style="margin-right: 4px;"></i>
-                        Entri tidak ditemukan dengan kata kunci pencarian:
-                        <strong>"{{ request('q') }}"</strong>
+                    <div style="color: red; text-align: center;">
+                        <i class="bx bx-error" style="font-size: 1.2em; vertical-align: middle;"></i>
+                        <span>
+                            Entri tidak ditemukan dengan kata kunci pencarian:
+                            <strong>"{{ request('q') }}"</strong>
+                        </span>
                     </div>
                 @endif
             </div>
