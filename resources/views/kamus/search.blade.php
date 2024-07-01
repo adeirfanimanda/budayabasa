@@ -30,7 +30,7 @@
             </a>
             <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse"
                 data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="oi oi-menu"></span> Menu
+                <span class="oi oi-menu"></span>
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav nav ml-auto">
@@ -51,7 +51,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#kamus" class="nav-link">
-                            <span>Kamus</span>
+                            <span style="color: #696CFF">Kamus</span>
                         </a>
                     </li>
                     @if (Auth::check())
@@ -130,9 +130,9 @@
                     @endforeach
                 </div>
                 @if ($dictionaries->isEmpty())
-                    <div style="color: red; text-align: center;">
-                        <i class="bx bx-error" style="font-size: 1.2em; vertical-align: middle;"></i>
-                        <span>
+                    <div style="text-align: center;">
+                        <i class="bx bx-error" style="color: red; font-size: 1.2em; vertical-align: middle;"></i>
+                        <span style="color: red">
                             Entri tidak ditemukan dengan kata kunci pencarian:
                             <strong>"{{ request('q') }}"</strong>
                         </span>
@@ -167,7 +167,7 @@
     <script src="{{ asset('homepage/js/jquery.animateNumber.min.js') }}"></script>
     <script src="{{ asset('homepage/js/scrollax.min.js') }}"></script>
     <script src="{{ asset('homepage/js/main.js') }}"></script>
-    <script>
+    {{-- <script>
         window.addEventListener('scroll', function() {
             var navbar = document.getElementById('ftco-navbar');
             var logo = navbar.querySelector('img');
@@ -179,7 +179,7 @@
                 logo.src = '/homepage/images/logo-dark.svg';
             }
         });
-    </script>
+    </script> --}}
 </body>
 
 </html>
