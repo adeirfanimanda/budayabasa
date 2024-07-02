@@ -18,31 +18,9 @@
     <link rel="stylesheet" href="{{ asset('homepage/css/magnific-popup.css') }}">
     <link rel="stylesheet" href="{{ asset('homepage/css/aos.css') }}">
     <link rel="stylesheet" href="{{ asset('homepage/css/style.css') }}">
-    <style>
-        .btn-outline-custom {
-            color: white;
-            background-color: #3c3c3c;
-            text-transform: none;
-            font-size: 14px;
-        }
 
-        .btn-outline-custom:hover {
-            color: white;
-            background-color: #696CFF;
-        }
-
-        @media screen and (min-width:1000px) {
-            .height-300 {
-                height: 270px
-            }
-        }
-
-        @media screen and (min-width:768px) and (max-width:1000px) {
-            .height-300 {
-                height: 400px
-            }
-        }
-    </style>
+    {{-- Style Custom --}}
+    <link rel="stylesheet" href="{{ asset('homepage/css/custom.css') }}">
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -50,7 +28,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <img src="{{ asset('homepage/images/logo-light.svg') }}" alt="Logo">
+                <img src="{{ asset('homepage/images/logo-dark.svg') }}" alt="Logo">
             </a>
             <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse"
                 data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,25 +60,25 @@
                         @if (auth()->user()->is_admin)
                             <li class="nav-item">
                                 <a href="/admin/dashboard" class="nav-link">
-                                    <span><i class="bx bx-desktop" style="font-size:16px"></i>&nbsp;Dashboard</span>
+                                    <span><i class="bx bx-desktop"></i>&nbsp;Dashboard</span>
                                 </a>
                             </li>
                         @else
                             <li class="nav-item">
                                 <a href="/materi" class="nav-link">
-                                    <span><i class="bx bx-book-content" style="font-size:16px"></i>&nbsp;Materi</span>
+                                    <span><i class="bx bx-book-content"></i>&nbsp;Materi</span>
                                 </a>
                             </li>
                         @endif
                     @else
                         <li class="nav-item">
                             <a href="/login" class="nav-link">
-                                <span><i class="bx bx-log-in-circle" style="font-size:16px"></i>&nbsp;Masuk</span>
+                                <span><i class="bx bx-log-in-circle"></i>&nbsp;Masuk</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/register" class="nav-link">
-                                <span><i class="bx bx-user" style="font-size:16px"></i>&nbsp;Daftar</span>
+                                <span><i class="bx bx-user"></i>&nbsp;Daftar</span>
                             </a>
                         </li>
                     @endif
@@ -119,7 +97,7 @@
                     <div class="row d-md-flex no-gutters slider-text align-items-end justify-content-end"
                         data-scrollax-parent="true">
                         <div class="one-third js-fullheight d-none d-lg-block order-md-last img"
-                            style="background-image:url(homepage/images/slider.jpg)">
+                            style="background-image:url(homepage/images/slider.png)">
                             <div class="overlay"></div>
                         </div>
                         <div class="one-forth d-flex align-items-center ftco-animate"
@@ -127,8 +105,8 @@
                             <div class="text">
                                 <h1 class="mb-4 mt-3">Aplikasi Belajar <span>Bahasa Indramayu</span> dengan Mudah</h1>
                                 <p>
-                                    <a href="/register" class="btn btn-primary py-3 px-4"
-                                        style="color:#fff!important">Gabung Sekarang
+                                    <a href="/register" class="btn btn-primary py-3 px-4">
+                                        Gabung Sekarang
                                     </a>
                                 </p>
                             </div>
@@ -146,23 +124,26 @@
             <div class="row d-md-flex align-items-center">
                 <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
                     <div class="block-18">
-                        <div class="text"><strong class="number"
-                                data-number="{{ $dictionaries }}">{{ $dictionaries }}</strong><span>Total
-                                Kosa Kata</span>
+                        <div class="text">
+                            <strong class="number" data-number="{{ $dictionaries }}">{{ $dictionaries }}</strong>
+                            <span>Total Kosa Kata</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
                     <div class="block-18">
-                        <div class="text"><strong class="number"
-                                data-number="{{ $users }}">0</strong><span>Total Pengguna</span></div>
+                        <div class="text">
+                            <strong class="number" data-number="{{ $users }}">0</strong>
+                            <span>Total Pengguna</span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
                     <div class="block-18">
-                        <div class="text"><strong class="number"
-                                data-number="{{ $materials }}">{{ $materials }}</strong><span>Total
-                                Materi</span></div>
+                        <div class="text">
+                            <strong class="number" data-number="{{ $materials }}">{{ $materials }}</strong>
+                            <span>Total Materi</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -183,35 +164,43 @@
                 <div class="col-md-6">
                     <div class="resume-wrap ftco-animate height-300">
                         <span class="date">Kamus Bahasa Indramayu</span>
-                        <p class="mt-4">Pengguna dapat mencari kosakata bahasa Indramayu dengan memasukkan kata
-                            kunci berdasarkan Ngoko ataupun Krama.</p>
+                        <p class="mt-4">
+                            Pengguna dapat mencari kosa kata Bahasa Indramayu dengan memasukkan kata kunci berdasarkan
+                            entri Ngoko ataupun Krama.
+                        </p>
                     </div>
                     <div class="resume-wrap ftco-animate height-300"><span class="date">Latihan</span>
-                        <p class="mt-4">Dalam menu 'Latihan' terdapat soal-soal yang bisa dikerjakan untuk melatih
-                            pemahaman tentang bahasa Indramayu. Latihan ini bisa dikerjakan secara berulang-ulang.</p>
+                        <p class="mt-4">
+                            Dalam menu 'Latihan' terdapat soal-soal yang bisa dikerjakan untuk melatih pemahaman tentang
+                            bahasa Indramayu. Latihan ini bisa dikerjakan secara berulang-ulang.
+                        </p>
                     </div>
                     <div class="resume-wrap ftco-animate height-300"><span class="date">Forum</span>
-                        <p class="mt-4">Forum digunakan untuk berdiskusi jika terdapat masalah mengenai materi yang
-                            ada. Setiap pengguna bisa mengajukan pertanyaan dan nantinya pertanyaan tersebut bisa
-                            dijawab oleh pengguna lain.</p>
+                        <p class="mt-4">
+                            Forum digunakan untuk berdiskusi jika terdapat masalah mengenai materi yang ada. Setiap
+                            pengguna bisa mengajukan pertanyaan dan nantinya pertanyaan tersebut bisa dijawab oleh
+                            pengguna lain.
+                        </p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="resume-wrap ftco-animate height-300"><span class="date">Materi</span>
-                        <p class="mt-4">Pengguna dapat melihat dan mengunduh materi pembelajaran bahasa Indramayu.
+                        <p class="mt-4">
+                            Pengguna dapat melihat dan mengunduh materi pembelajaran Bahasa Indramayu.
                         </p>
                     </div>
                     <div class="resume-wrap ftco-animate height-300"><span class="date">Nilai</span>
-                        <p class="mt-4">Setiap selesai menjawab latihan, pengguna dapat melihat nilainya langsung di
-                            menu 'Nilai'. Pengguna juga dapat melihat pertanyaan mana saja yang jawabannya benar dan
-                            juga salah. Selain itu, pengguna juga bisa menghapus riwayat mengerjakan latihannya.</p>
+                        <p class="mt-4">
+                            Setiap selesai menjawab latihan, pengguna dapat melihat nilainya di menu 'Nilai'.
+                            Pengguna juga dapat melihat pertanyaan mana saja yang jawabannya benar dan juga salah.
+                        </p>
                     </div>
                     <div class="resume-wrap ftco-animate height-300"><span class="date">Dokumentasi</span>
-                        <p class="mt-4">Dalam dokumentasi, pengguna dapat melihat tutorial bagaimana cara menggunakan
-                            aplikasi. Mulai dari membuat akun, cara menggunakan fitur kamus, melihat dan mengunduh
-                            materi,
-                            mengerjakan latihan, melihat nilai latihan,
-                            mengubah kata sandi, dan masih banyak lagi.</p>
+                        <p class="mt-4">
+                            Dalam dokumentasi, pengguna dapat membaca tutorial bagaimana cara menggunakan aplikasi.
+                            Mulai dari membuat akun, cara mencari kosa kata Bahasa Indramayu, melihat dan mengunduh
+                            materi, mengerjakan latihan, melihat nilai latihan, dan masih banyak lagi.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -220,7 +209,7 @@
     {{-- /Menu Aplikasi --}}
 
     {{-- Layanan --}}
-    <section class="ftco-section" id="layanan" style="padding: 0;">
+    <section class="ftco-section" id="layanan">
         <div class="container">
             <div class="row justify-content-center py-5 mt-5">
                 <div class="col-md-12 heading-section text-center ftco-animate">
@@ -265,7 +254,7 @@
                     <a class="services-1">
                         <span class="icon"><i class="bx bx-message-dots"></i></span>
                         <div class="desc">
-                            <h3 class="mb-5">Dukungan Komunitas</h3>
+                            <h3 class="mb-5">Forum Diskusi</h3>
                         </div>
                     </a>
                 </div>
@@ -283,7 +272,7 @@
     {{-- /Layanan --}}
 
     {{-- Footer --}}
-    <footer class="ftco-footer ftco-section" style="padding: 0; margin-top: 6em;">
+    <footer class="ftco-footer ftco-section">
         <div class="container">
             <div class="row">
                 <div class="col-md">

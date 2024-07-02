@@ -1,0 +1,120 @@
+body {
+    background-color: #F5F5F9;
+}
+
+/* Navbar */
+.navbar.navbar-dark {
+    background-color: #F5F5F9 !important;
+}
+
+.navbar-nav .nav-link span {
+    color: #232631;
+    font-weight: 500 !important;
+}
+
+.navbar-nav .nav-link.active span {
+    color: #696CFF;
+    font-weight: 500 !important;
+}
+
+.oi-menu {
+    color: #232631;
+}
+
+/* End Navbar */
+
+/* Header */
+.hero .slider-item .text h1 {
+    color: #232631 !important;
+}
+
+.hero .slider-item .btn-primary {
+    color: white !important;
+}
+
+/* End Header */
+
+/* Informasi */
+.ftco-counter .block-18 {
+    background-color: white;
+    border-radius: 20px;
+}
+
+.block-18 .text span {
+    color: #232631;
+    font-weight: 600;
+}
+
+/* End Informasi */
+
+/* Menu Aplikasi */
+.heading-section h2 {
+    color: #232631;
+}
+
+.heading-section p {
+    color: #7B7B7B;
+}
+
+.resume-wrap {
+    background-color: white;
+    border-radius: 20px;
+}
+
+.resume-wrap p {
+    color: #7B7B7B;
+}
+
+/* End Menu Aplikasi */
+
+/* Layanan */
+#layanan {
+    padding: 0;
+}
+
+.services-1 {
+    background-color: white;
+    border-radius: 40px !important;
+}
+
+.services-1 .desc h3 {
+    color: #232631;
+}
+
+/* End Layanan */
+
+/* Footer */
+.ftco-footer {
+    margin-top: 6em;
+    padding: 0;
+    padding-top: 56px;
+    background-color: #232631;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+}
+
+/* End Footer */
+
+.btn-outline-custom {
+    color: white;
+    background-color: #3c3c3c;
+    text-transform: none;
+    font-size: 14px;
+}
+
+.btn-outline-custom:hover {
+    color: white;
+    background-color: #696CFF;
+}
+
+@media screen and (min-width:1000px) {
+    .height-300 {
+        height: 270px
+    }
+}
+
+@media screen and (min-width:768px) and (max-width:1000px) {
+    .height-300 {
+        height: 400px
+    }
+}
