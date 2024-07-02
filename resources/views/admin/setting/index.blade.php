@@ -32,8 +32,8 @@
                 <li class="nav-item">
                     <button type="button" class="nav-link @if ($errors->has('passwordLama') || $errors->has('passwordBaru') || session()->has('passwordLamaSalah')) active @endif"
                         role="tab" data-bs-toggle="tab" data-bs-target="#navs-akun" aria-controls="navs-akun"><i
-                            class="tf-icons bx bxs-lock-alt fs-6 me-1"
-                            style="margin-bottom: 3px;"></i>&nbsp;Akun</button>
+                            class="tf-icons bx bxs-lock-alt fs-6 me-1" style="margin-bottom: 3px;"></i>&nbsp;Kata Sandi
+                    </button>
                 </li>
                 <li class="nav-item">
                     <button type="button" class="nav-link @if (
@@ -172,7 +172,7 @@
 
                 <div class="tab-pane fade @if ($errors->has('passwordLama') || $errors->has('passwordBaru') || session()->has('passwordLamaSalah')) show active @endif" id="navs-akun"
                     role="tabpanel">
-                    <h5 class="card-header" style="margin-top: -0.5rem;">Ubah Password</h5>
+                    <h5 class="card-header" style="margin-top: -0.5rem;">Ubah Kata Sandi</h5>
                     <p style="padding-left: 1.5rem; margin-top:-1.3rem; margin-bottom:-5px;">Kelola informasi data Anda
                         untuk mengontrol, melindungi dan mengamankan akun
                     </p>
@@ -181,8 +181,9 @@
                         @csrf
                         <div class="card-body">
                             <div class="row mb-2 mb-lg-3">
-                                <label class="col-sm-2 col-form-label required-label" for="passwordLama">Password
-                                    Lama</label>
+                                <label class="col-sm-2 col-form-label required-label" for="passwordLama">
+                                    Kata Sandi Lama
+                                </label>
                                 <div class="col-sm-10 col-md-4">
                                     <input type="password"
                                         class="form-control  @error('passwordLama') is-invalid @enderror"
@@ -194,8 +195,9 @@
                                 </div>
                             </div>
                             <div class="row mb-2 mb-lg-3">
-                                <label class="col-sm-2 col-form-label required-label" for="passwordBaru">Password
-                                    Baru</label>
+                                <label class="col-sm-2 col-form-label required-label" for="passwordBaru">
+                                    Kata Sandi Baru
+                                </label>
                                 <div class="col-sm-10 col-md-4">
                                     <input type="password"
                                         class="form-control  @error('passwordBaru') is-invalid @enderror"
@@ -205,14 +207,17 @@
                                         </div>
                                     @enderror
                                     <div class="form-text @error('passwordBaru') d-none @enderror"><i
-                                            class='bx bx-error' style="font-size: 100%;"></i>&nbsp;Password minimal 8
+                                            class='bx bx-error' style="font-size: 100%;"></i>&nbsp;
+                                        Kata sandi minimal 8
                                         karakter termasuk huruf kapital & kecil (A-Z), (a-z), angka (1-9), dan karakter
-                                        unik (@,#,%,dll)</div>
+                                        unik (@,#,%,dll)
+                                    </div>
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <label class="col-sm-2 col-form-label required-label" for="ulangiPasswordBaru">Ulangi
-                                    Password Baru</label>
+                                <label class="col-sm-2 col-form-label required-label" for="ulangiPasswordBaru">
+                                    Ulangi Kata Sandi Baru
+                                </label>
                                 <div class="col-sm-10 col-md-4">
                                     <input type="password" class="form-control" id="ulangiPasswordBaru"
                                         name="passwordBaru_confirmation" autocomplete="off" />
@@ -221,7 +226,8 @@
                             <div class="row justify-content-end">
                                 <div class="col-sm-10">
                                     <button type="submit" class="btn btn-primary"><i class="bx bx-save fs-6"
-                                            style="margin-bottom: 2px;"></i>&nbsp;Simpan</button>
+                                            style="margin-bottom: 2px;"></i>&nbsp;Simpan
+                                    </button>
                                 </div>
                             </div>
                         </div>

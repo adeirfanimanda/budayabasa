@@ -25,8 +25,8 @@
                 <li class="nav-item">
                     <button type="button" class="nav-link @if ($errors->has('passwordLama') || $errors->has('passwordBaru') || session()->has('passwordLamaSalah')) active @endif"
                         role="tab" data-bs-toggle="tab" data-bs-target="#navs-akun" aria-controls="navs-akun"><i
-                            class="tf-icons bx bxs-lock-alt fs-6 me-1"
-                            style="margin-bottom: 3px;"></i>&nbsp;Akun</button>
+                            class="tf-icons bx bxs-lock-alt fs-6 me-1" style="margin-bottom: 3px;"></i>&nbsp;Kata Sandi
+                    </button>
                 </li>
             </ul>
             <div class="tab-content">
