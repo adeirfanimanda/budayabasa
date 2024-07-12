@@ -100,7 +100,7 @@
                 </div>
                 <br>
                 <div class="">
-                    @foreach ($dictionaries as $index => $dictionary)
+                    @foreach ($dictionaries->take(2) as $index => $dictionary)
                         <div class="dictionary-entry">
                             @if (count($dictionaries) > 1)
                                 <div><strong>Entri {{ $index + 1 }}</strong></div>
