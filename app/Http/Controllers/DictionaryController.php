@@ -36,7 +36,7 @@ class DictionaryController extends Controller
             'indonesian' => 'required|max:255|string',
             'example' => 'nullable|max:255|string',
             'category' => 'required|in:huruf,angka',
-            'audio' => 'mimes:mp3|max:250'
+            'audio' => 'mimes:mp3,m4a|max:250'
         ]);
 
         if ($request->file('audio')) {
@@ -55,7 +55,7 @@ class DictionaryController extends Controller
             'indonesianEdit' => 'max:255|string',
             'exampleEdit' => 'nullable|max:255|string',
             'categoryEdit' => 'required|in:huruf,angka',
-            'audioEdit' => 'mimes:mp3|max:250'
+            'audioEdit' => 'mimes:mp3,m4a|max:250'
         ], [
             'audioEdit.mimes' => 'The audio field must be a file of type: mp3',
             'audioEdit.max' => 'The audio field must not be greater than 250 kilobytes.',
