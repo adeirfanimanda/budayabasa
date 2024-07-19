@@ -35,8 +35,6 @@ Route::get('/', function () {
     ]);
 });
 
-Route::post('/admin/data-kamus/import', [DictionaryController::class, 'import'])->name('dictionary.import');
-
 // Kamus
 Route::get('/kamus', [DictionaryController::class, 'index_users']);
 Route::get('/kamus/search', [DictionaryController::class, 'search_redis']);
@@ -105,6 +103,7 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::prefix('data-kamus')->group(function () {
         Route::get('/', [DictionaryController::class, 'index']);
         Route::post('/', [DictionaryController::class, 'store']);
+        Route::post('/import', [DictionaryController::class, 'import'])->name('dictionary.import');
         Route::post('/update', [DictionaryController::class, 'update']);
         Route::get('/update', fn () => back());
         Route::post('/delete', [DictionaryController::class, 'destroy']);
