@@ -2,11 +2,10 @@
 <html lang="id">
 
 <head>
-    <title>{{ $app->name_app }} - {{ $title }}</title>
+    <title>BudayaBasa - {{ $title }}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-    <link rel="icon" type="image/x-icon"
-        href="{{ Storage::disk('public')->exists('logo-aplikasi') ? asset('storage/' . $app->logo) : asset('assets/img/logo-aplikasi/logo.svg') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/logo-aplikasi/logo.svg') }}">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('homepage/css/open-iconic-bootstrap.min.css') }}">

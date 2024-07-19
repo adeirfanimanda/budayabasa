@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Imports\DictionariesImport;
 use App\Models\Application;
 use App\Models\Dictionary;
+use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Maatwebsite\Excel\Facades\Excel;
@@ -116,23 +117,8 @@ class DictionaryController extends Controller
         ]);
     }
 
-    public function search_users()
-    {
-        $keyword = request('q');
-
-        if (!$keyword) {
-            return redirect('/kamus');
-        }
-
-        return view('kamus.search', [
-            'app' => Application::first(),
-            'title' => 'Kamus',
-            'dictionaries' => Dictionary::latest()->searching2($keyword)->get()
-        ]);
-    }
-
     // users search -> implementasi redis sebagai cache
-    public function search_redis()
+    public function search_kamus()
     {
         $keyword = request('q');
 
@@ -143,12 +129,19 @@ class DictionaryController extends Controller
         $cacheKey = 'search_' . $keyword;
         $cacheTime = 86400;
 
+        // Mulai pengukuran waktu
+        Debugbar::startMeasure('search_word', 'Search Word: ' . $keyword);
+
         $dictionaries = Cache::remember($cacheKey, $cacheTime, function () use ($keyword) {
-            return Dictionary::latest()->searching2($keyword)->get();
+            // Ambil data dari database utama
+            $result = Dictionary::latest()->searching2($keyword)->get();
+            return $result;
         });
 
+        // Pengukuran waktu untuk database query atau Redis hit
+        Debugbar::stopMeasure('search_word');
+
         return view('kamus.search', [
-            'app' => Application::first(),
             'title' => 'Kamus',
             'dictionaries' => $dictionaries
         ]);
