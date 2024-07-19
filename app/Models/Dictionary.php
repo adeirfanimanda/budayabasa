@@ -16,7 +16,8 @@ class Dictionary extends Model
     {
         $query->when($keyword, function ($query, $keyword) {
             return $query->where('ngoko', 'like', '%' . $keyword . '%')
-                ->orWhere('krama', 'like', '%' . $keyword . '%');
+                ->orWhere('krama', 'like', '%' . $keyword . '%')
+                ->orWhere('indonesian', 'like', '%' . $keyword . '%');
         });
     }
 
@@ -26,7 +27,8 @@ class Dictionary extends Model
         if ($keyword) {
             return $query->where(function ($query) use ($keyword) {
                 $query->where('ngoko', '=', $keyword)
-                    ->orWhere('krama', '=', $keyword);
+                    ->orWhere('krama', '=', $keyword)
+                    ->orWhere('indonesian', '=', $keyword);
             });
         } else {
             return $query;
