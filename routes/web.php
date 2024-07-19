@@ -37,7 +37,7 @@ Route::get('/', function () {
 
 // Kamus
 Route::get('/kamus', [DictionaryController::class, 'index_users']);
-Route::get('/kamus/search', [DictionaryController::class, 'search_redis']);
+Route::get('/kamus/search', [DictionaryController::class, 'search_kamus']);
 
 // Authentication
 Route::middleware('guest')->group(function () {
