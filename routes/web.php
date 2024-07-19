@@ -35,6 +35,8 @@ Route::get('/', function () {
     ]);
 });
 
+Route::post('/admin/data-kamus/import', [DictionaryController::class, 'import'])->name('dictionary.import');
+
 // Kamus
 Route::get('/kamus', [DictionaryController::class, 'index_users']);
 Route::get('/kamus/search', [DictionaryController::class, 'search_redis']);

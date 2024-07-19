@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\DictionariesImport;
 use App\Models\Application;
 use App\Models\Dictionary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DictionaryController extends Controller
 {
@@ -45,6 +47,20 @@ class DictionaryController extends Controller
 
         Dictionary::create($validatedData);
         return back()->with('addDictionarySuccess', 'Data kamus berhasil ditambah!');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls|max:20000'
+        ]);
+
+        try {
+            Excel::import(new DictionariesImport, $request->file('file'));
+            return back()->with('importDictionarySuccess', 'Data kamus berhasil diimport!');
+        } catch (\Exception $e) {
+            return back()->withErrors(['file' => 'Terjadi kesalahan saat mengimpor data. Pastikan format file sesuai!']);
+        }
     }
 
     public function update(Request $request)

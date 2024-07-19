@@ -289,6 +289,13 @@ $(function () {
     if (addDictionary) {
         setMessage(addDictionary, "success");
     }
+
+    // import dictionary success
+    const importDictionary = $(".flash-message").data("import-dictionary");
+    if (importDictionary) {
+        setMessage(importDictionary, "success");
+    }
+
     // edit dictionary success
     const editDictionary = $(".flash-message").data("edit-dictionary");
     if (editDictionary) {
@@ -319,6 +326,13 @@ $(function () {
         errAddDictionaryCategory
     ) {
         $("#formModalAdminDictionary").modal("show");
+    }
+
+    // error import dictionary
+    const errImportDictionary = $("#errorImportDictionary").data("error-file");
+
+    if (errImportDictionary) {
+        $("#formModalImportDictionary").modal("show");
     }
 
     // error edit Dictionary

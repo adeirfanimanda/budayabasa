@@ -6,6 +6,14 @@ $(".cancelModalAddDictionary, .cancelModalEditDictionary").on("click", function 
     inputs.removeClass("is-invalid invalid-feedback").val("");
 });
 
+// Membersihkan form saat tombol cancel diklik
+$(".cancelModalImportDictionary").on("click", function () {
+    $(".modalImportDictionary")[0].reset();
+
+    var inputs = $("#formModalImportDictionary #file");
+    inputs.removeClass("is-invalid invalid-feedback").val("");
+});
+
 // Memuat data ke dalam form edit saat tombol edit diklik
 $(".buttonEditDictionary").on("click", function () {
     const code = $(this).data("code-dictionary");

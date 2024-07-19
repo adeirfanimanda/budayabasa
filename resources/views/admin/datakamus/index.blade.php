@@ -49,6 +49,7 @@
 @endsection
 <div class="flash-message"
     data-add-dictionary="@if (session()->has('addDictionarySuccess')) {{ session('addDictionarySuccess') }} @endif"
+    data-import-dictionary="@if (session()->has('importDictionarySuccess')) {{ session('importDictionarySuccess') }} @endif"
     data-edit-dictionary="@if (session()->has('editDictionarySuccess')) {{ session('editDictionarySuccess') }} @endif"
     data-delete-dictionary="@if (session()->has('deleteDictionarySuccess')) {{ session('deleteDictionarySuccess') }} @endif">
 </div>
@@ -61,6 +62,11 @@
                         data-bs-toggle="modal" data-bs-target="#formModalAdminDictionary"
                         style="border-radius: 0.375rem;">
                         <i class='bx bx-book fs-6'></i>&nbsp;TAMBAH KAMUS
+                    </button>
+                    <button type="button" class="btn btn-xs btn-dark fw-bold p-2 buttonImportDictionary"
+                        data-bs-toggle="modal" data-bs-target="#formModalImportDictionary"
+                        style="border-radius: 0.375rem; margin-left: 10px;">
+                        <i class='bx bx-upload fs-6'></i>&nbsp;IMPORT DATA
                     </button>
                 </div>
                 <div class="justify-content-end">
@@ -396,6 +402,53 @@
                             style="margin-bottom: 3px;"></i>&nbsp;Batal</button>
                     <button type="submit" class="btn btn-primary"><i class='bx bx-save fs-6'
                             style="margin-bottom: 3px;"></i>&nbsp;Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="errorImportDictionary" data-error-file="@error('file') {{ $message }} @enderror"></div>
+<!-- Modal Import Dictionary -->
+<div class="modal fade" id="formModalImportDictionary" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form action="{{ route('dictionary.import') }}" method="post" class="modalImportDictionary"
+            enctype="multipart/form-data">
+            @csrf
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-between">
+                    <h5 class="modal-title text-primary fw-bold">Import Data Kamus&nbsp;<i class='bx bx-upload fs-5'
+                            style="margin-bottom: 1px;"></i></h5>
+                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow cancelModalImportDictionary"
+                        data-bs-dismiss="modal"><i class="bx bx-x-circle text-danger fs-4" data-bs-toggle="tooltip"
+                            data-popup="tooltip-custom" data-bs-placement="auto" title="Tutup"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label for="file" class="form-label required-label">Upload Excel</label>
+                            <input type="file" id="file" name="file"
+                                class="form-control @error('file') is-invalid @enderror" required>
+                            @error('file')
+                                <div class="invalid-feedback" style="margin-bottom: -3px;">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <div class="form-text @error('file') d-none @enderror">
+                                Ukuran maks 20 MB. Format: .xlsx atau .xls
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger cancelModalImportDictionary"
+                        data-bs-dismiss="modal"><i class='bx bx-share fs-6'
+                            style="margin-bottom: 3px;"></i>&nbsp;Batal
+                    </button>
+                    <button type="submit" class="btn btn-primary"><i class='bx bx-paper-plane fs-6'
+                            style="margin-bottom: 3px;"></i>&nbsp;Tambah
+                    </button>
                 </div>
             </div>
         </form>
