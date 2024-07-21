@@ -60,7 +60,7 @@
                             <div class="icon-holder"><i class="icon fa fa-book"></i></div>
                             <h3 class="title">Kamus Bahasa Indramayu</h3>
                             <p class="intro">Bagaimana cara mencari kosa kata Bahasa Indramayu?</p><a class="link"
-                                href="/docs/v1/start#about"><span></span></a>
+                                href="/docs/v1/start#kamus"><span></span></a>
                         </div>
                     </div>
                     <div class="item item-purple col-lg-4 col-6">
