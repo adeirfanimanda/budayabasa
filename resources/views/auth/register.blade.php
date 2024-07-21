@@ -59,14 +59,10 @@
                     <a href="/" class="app-brand-link gap-2">
                         <img src="{{ asset('homepage/images/logo-dark.svg') }}" alt="Logo" class="h-auto"
                             style="width: 280px;">
-                        {{-- <img src="@if (Storage::disk('public')->exists('logo-aplikasi')) {{ asset('storage/' . $app[0]->logo) }} @else {{ asset('assets/img/logo-aplikasi/logo.png') }} @endif"
-                            class="h-auto" style="width: 160px;" alt="Logo-{{ $app[0]->name_app }}"> --}}
                     </a>
                 </div><br>
                 <div class="card">
                     <div class="card-body">
-                        {{-- <h4 class="mb-2">Welcome to {{ $app[0]->name_app }}</h4>
-                        <p class="mb-3">Silahkan daftar dan mulai belajar.</p> --}}
                         <form id="formAuthentication" class="mb-3" action="/register" method="POST">
                             @csrf
                             <div class="mb-2">
@@ -106,22 +102,26 @@
                                     </div>
                                 @enderror
                             </div>
-                            {{-- <div class="mb-2">
-                                <label for="gender" class="form-label required-label">Jenis Kelamin</label>
-                                <select class="form-select @error('gender') is-invalid @enderror" name="gender"
-                                    id="gender" style="cursor: pointer;">
-                                    <option value="" disabled selected>Pilih Jenis Kelamin</option>
-                                    <option id="laki-laki" @if (old('gender') == 'Laki-Laki') selected @endif
-                                        value="Laki-Laki">Laki-Laki</option>
-                                    <option id="perempuan" @if (old('gender') == 'Perempuan') selected @endif
-                                        value="Perempuan">Perempuan</option>
+                            <div class="mb-2">
+                                <label for="level" class="form-label required-label">Jenjang Pendidikan</label>
+                                <select class="form-select @error('level') is-invalid @enderror" name="level"
+                                    id="level" style="cursor: pointer;">
+                                    <option value="" disabled selected>Pilih Jenjang Pendidikan</option>
+                                    <option id="sd" @if (old('level') == 'SD') selected @endif
+                                        value="SD">SD</option>
+                                    <option id="smp" @if (old('level') == 'SMP') selected @endif
+                                        value="SMP">SMP</option>
+                                    <option id="sma" @if (old('level') == 'SMA') selected @endif
+                                        value="SMA">SMA</option>
+                                    <option id="masyarakatumum" @if (old('level') == 'Masyarakat Umum') selected @endif
+                                        value="Masyarakat Umum">Masyarakat Umum</option>
                                 </select>
-                                @error('gender')
+                                @error('level')
                                     <div class="invalid-feedback" style="margin-bottom: -3px;">
                                         {{ $message }}
                                     </div>
                                 @enderror
-                            </div> --}}
+                            </div>
                             <div class="mb-2">
                                 <label class="form-label required-label">Jenis Kelamin</label>
                                 <br>

@@ -24,6 +24,7 @@ class RegisterController extends Controller
             'username' => 'required|string|regex:/^[a-zA-Z0-9]+$/|min:5|max:50|unique:users',
             'name' => 'required|string|max:100',
             'email' => 'required|email:dns|unique:users',
+            'level' => 'required|string|in:SD,SMP,SMA,Masyarakat Umum',
             'gender' => 'required|in:Laki-Laki,Perempuan',
             'password' => ['required', 'max:255', Password::min(8)->mixedCase()->letters()->numbers()->symbols(), 'confirmed'],
             'terms' => 'required'
