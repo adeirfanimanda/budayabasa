@@ -31,6 +31,7 @@ class AdminPenggunaController extends Controller
             'email' => 'required|email:dns|unique:users',
             'image' => 'image|file|max:500|dimensions:ratio=1/1',
             'gender' => 'required|in:Laki-Laki,Perempuan',
+            'level' => 'required|in:SD,SMP,SMA,Masyarakat Umum',
             'password' => ['required', 'max:255', Password::min(8)->mixedCase()->letters()->numbers()->symbols()]
         ], [
             'image.dimensions' => 'The :attribute must have a 1:1 aspect ratio.',
@@ -62,6 +63,7 @@ class AdminPenggunaController extends Controller
                 'name' => 'required|string|max:100',
                 'image' => 'image|file|max:500|dimensions:ratio=1/1',
                 'gender' => 'required|in:Laki-Laki,Perempuan',
+                'level' => 'required|in:SD,SMP,SMA,Masyarakat Umum',
             ];
 
             if ($request->username != $data->username) {

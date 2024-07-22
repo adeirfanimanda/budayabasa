@@ -209,17 +209,19 @@ $(function () {
     const errName = $("#errorModalAddUser").data("error-p-name");
     const errUsername = $("#errorModalAddUser").data("error-p-username");
     const errEmail = $("#errorModalAddUser").data("error-p-email");
+    const errLevel = $("#errorModalAddUser").data("error-p-level");
     const errGender = $("#errorModalAddUser").data("error-p-gender");
     const errPass = $("#errorModalAddUser").data("error-p-pass");
     const errImg = $("#errorModalAddUser").data("error-p-image");
 
-    if (errName || errUsername || errEmail || errGender || errPass || errImg) {
+    if (errName || errUsername || errEmail || errLevel || errGender || errPass || errImg) {
         $("#formModalAdminAddPengguna").modal("show");
     }
 
     const errEditName = $("#errorModalEditUser").data("error-p-name");
     const errEditUsername = $("#errorModalEditUser").data("error-p-username");
     const errEditEmail = $("#errorModalEditUser").data("error-p-email");
+    const errEditLevel = $("#errorModalEditUser").data("error-p-level");
     const errEditGender = $("#errorModalEditUser").data("error-p-gender");
     const errEditPass = $("#errorModalEditUser").data("error-p-pass");
     const errEditImg = $("#errorModalEditUser").data("error-p-image");
@@ -228,6 +230,7 @@ $(function () {
         errEditName ||
         errEditUsername ||
         errEditEmail ||
+        errEditLevel ||
         errEditGender ||
         errEditPass ||
         errEditImg

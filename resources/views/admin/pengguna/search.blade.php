@@ -63,6 +63,7 @@
                                     <th class="text-white">Nama Lengkap</th>
                                     <th class="text-white">Username</th>
                                     <th class="text-white">Email</th>
+                                    <th class="text-white">Jenjang Pendidikan</th>
                                     <th class="text-white">Jenis Kelamin</th>
                                     <th class="text-white">Tanggal Lahir</th>
                                     <th class="text-white">Alamat</th>
@@ -85,6 +86,20 @@
                                         <td class="text-capitalize">{{ $user->name }}</td>
                                         <td>{{ '@' . $user->username }}</td>
                                         <td>{{ substr($user->email, 0, 3) . str_repeat('*', strlen(substr($user->email, 0, strpos($user->email, '@'))) - 3) . substr($user->email, -10) }}
+                                        </td>
+                                        <td class="text-center">
+                                            @if ($user->level == 'SD')
+                                                <span class="badge bg-label-success fw-bold">{{ 'SD' }}</span>
+                                            @elseif ($user->level == 'SMP')
+                                                <span class="badge bg-label-primary fw-bold">{{ 'SMP' }}</span>
+                                            @elseif ($user->level == 'SMA')
+                                                <span class="badge bg-label-info fw-bold">{{ 'SMA' }}</span>
+                                            @elseif ($user->level == 'Masyarakat Umum')
+                                                <span
+                                                    class="badge bg-label-warning fw-bold">{{ 'Masyarakat Umum' }}</span>
+                                            @else
+                                                Belum diinput pengguna!
+                                            @endif
                                         </td>
                                         <td>
                                             @if ($user->gender === null)
@@ -151,9 +166,11 @@
 <div id="errorModalAddUser" data-error-p-name="@error('name') {{ $message }} @enderror"
     data-error-p-username="@error('username') {{ $message }} @enderror"
     data-error-p-email="@error('email') {{ $message }} @enderror"
+    data-error-p-level="@error('level') {{ $message }} @enderror"
     data-error-p-gender="@error('gender') {{ $message }} @enderror"
     data-error-p-image="@error('image') {{ $message }} @enderror"
-    data-error-p-pass="@error('password') {{ $message }} @enderror"></div>
+    data-error-p-pass="@error('password') {{ $message }} @enderror">
+</div>
 <!-- Modal Add Pengguna-->
 <div class="modal fade" id="formModalAdminAddPengguna" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -209,38 +226,40 @@
                             @enderror
                         </div>
                     </div>
-                    {{-- <div class="row">
+                    <div class="row">
                         <div class="col mb-3">
-                            <label for="gender_user" class="form-label required-label">Jenis Kelamin</label>
-                            <select class="form-select @error('gender') is-invalid @enderror" name="gender"
-                                id="gender_user" style="cursor: pointer;">
-                                <option value="" disabled selected>Pilih Jenis Kelamin</option>
-                                <option id="laki-laki" @if (old('gender') == 'Laki-Laki') selected @endif
-                                    value="Laki-Laki">Laki-Laki</option>
-                                <option id="perempuan" @if (old('gender') == 'Perempuan') selected @endif
-                                    value="Perempuan">Perempuan</option>
+                            <label for="level_user" class="form-label required-label">Jenjang Pendidikan</label>
+                            <select class="form-select @error('level') is-invalid @enderror" name="level"
+                                id="level_user" style="cursor: pointer;" required>
+                                <option value="" disabled selected>Pilih Jenjang Pendidikan</option>
+                                <option value="SD" @if (old('level') == 'SD') selected @endif>SD</option>
+                                <option value="SMP" @if (old('level') == 'SMP') selected @endif>SMP</option>
+                                <option value="SMA" @if (old('level') == 'SMA') selected @endif>SMA</option>
+                                <option value="Masyarakat Umum" @if (old('level') == 'Masyarakat Umum') selected @endif>
+                                    Masyarakat Umum
+                                </option>
                             </select>
-                            @error('gender')
+                            @error('level')
                                 <div class="invalid-feedback" style="margin-bottom: -3px;">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
-                    </div> --}}
+                    </div>
                     <div class="row">
                         <div class="col mb-3">
                             <label class="form-label required-label">Jenis Kelamin</label>
                             <br>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="gender" id="laki-laki"
-                                    value="Laki-Laki" @if (old('gender') == 'Laki-Laki') checked @endif>
+                                    value="Laki-Laki" @if (old('gender') == 'Laki-Laki') checked @endif required>
                                 <label class="form-check-label" for="laki-laki">
                                     Laki-Laki
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="gender" id="perempuan"
-                                    value="Perempuan" @if (old('gender') == 'Perempuan') checked @endif>
+                                    value="Perempuan" @if (old('gender') == 'Perempuan') checked @endif required>
                                 <label class="form-check-label" for="perempuan">
                                     Perempuan
                                 </label>
@@ -305,6 +324,7 @@
         data-error-p-name="@if (session('validationErrors')) @foreach (session('validationErrors')['name'] ?? [] as $errorMessage) {{ $errorMessage }} @endforeach @endif"
         data-error-p-username="@if (session('validationErrors')) @foreach (session('validationErrors')['username'] ?? [] as $errorMessage) {{ $errorMessage }} @endforeach @endif"
         data-error-p-email="@if (session('validationErrors')) @foreach (session('validationErrors')['email'] ?? [] as $errorMessage) {{ $errorMessage }} @endforeach @endif"
+        data-error-p-level="@if (session('validationErrors')) @foreach (session('validationErrors')['level'] ?? [] as $errorMessage) {{ $errorMessage }} @endforeach @endif"
         data-error-p-gender="@if (session('validationErrors')) @foreach (session('validationErrors')['gender'] ?? [] as $errorMessage) {{ $errorMessage }} @endforeach @endif"
         data-error-p-pass="@if (session('validationErrors')) @foreach (session('validationErrors')['password'] ?? [] as $errorMessage) {{ $errorMessage }} @endforeach @endif"
         data-error-p-image="@if (session('validationErrors')) @foreach (session('validationErrors')['image'] ?? [] as $errorMessage) {{ $errorMessage }} @endforeach @endif">
@@ -379,16 +399,40 @@
                     </div>
                     <div class="row">
                         <div class="col mb-3">
-                            <label for="edit_gender_user" class="form-label required-label">Jenis Kelamin</label>
-                            <select
-                                class="form-select @if (session('validationErrors')) @foreach (session('validationErrors')['gender'] ?? [] as $errorMessage) is-invalid @endforeach @endif"
-                                name="gender" id="edit_gender_user" style="cursor: pointer;">
-                                <option value="" disabled selected>Pilih Jenis Kelamin</option>
-                                <option id="gender_laki-laki" @if (old('gender') == 'Laki-Laki') selected @endif
-                                    value="Laki-Laki">Laki-Laki</option>
-                                <option id="gender_perempuan" @if (old('gender') == 'Perempuan') selected @endif
-                                    value="Perempuan">Perempuan</option>
+                            <label for="edit_level_user" class="form-label required-label">Jenjang Pendidikan</label>
+                            <select class="form-select" name="level" id="edit_level_user"
+                                style="cursor: pointer;">
+                                <option value="" disabled>Pilih Jenjang Pendidikan</option>
+                                <option id="level_sd" value="SD">SD</option>
+                                <option id="level_smp" value="SMP">SMP</option>
+                                <option id="level_sma" value="SMA">SMA</option>
+                                <option id="level_umum" value="Masyarakat Umum">Masyarakat Umum</option>
                             </select>
+                            @if (session('validationErrors'))
+                                @foreach (session('validationErrors')['level'] ?? [] as $errorMessage)
+                                    <div class="invalid-feedback" style="margin-bottom: -3px;">
+                                        {{ $errorMessage }}
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label class="form-label required-label">Jenis Kelamin</label>
+                            <br>
+                            <div class="form-check form-check-inline">
+                                <input
+                                    class="form-check-input @if (session('validationErrors')) @foreach (session('validationErrors')['gender'] ?? [] as $errorMessage) is-invalid @endforeach @endif"
+                                    type="radio" name="gender" id="gender_laki-laki" value="Laki-Laki" required>
+                                <label class="form-check-label" for="gender_laki-laki">Laki-Laki</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input
+                                    class="form-check-input @if (session('validationErrors')) @foreach (session('validationErrors')['gender'] ?? [] as $errorMessage) is-invalid @endforeach @endif"
+                                    type="radio" name="gender" id="gender_perempuan" value="Perempuan" required>
+                                <label class="form-check-label" for="gender_perempuan">Perempuan</label>
+                            </div>
                             @if (session('validationErrors'))
                                 @foreach (session('validationErrors')['gender'] ?? [] as $errorMessage)
                                     <div class="invalid-feedback" style="margin-bottom: -3px;">

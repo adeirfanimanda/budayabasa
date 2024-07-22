@@ -1,16 +1,27 @@
 $(".cancelModalAddUser, .cancelModalEditUser").on("click", function () {
+    // Reset form modal
     $(".modalAdminAddPengguna, .modalAdminEditPengguna")[0].reset();
-    $(
-        "#formModalAdminAddPengguna #nama_lengkap_user, #formModalAdminAddPengguna #username_user, #formModalAdminAddPengguna #profil_user, #formModalAdminAddPengguna #email_user, #formModalAdminAddPengguna #gender_user, #formModalAdminAddPengguna #password_user"
-    ).removeClass("is-invalid");
-    $(
-        "#formModalAdminEditPengguna #edit_nama_lengkap_user, #formModalAdminEditPengguna #edit_username_user, #formModalAdminEditPengguna #edit_email_user, #formModalAdminEditPengguna #edit_profil_user, #formModalAdminEditPengguna #edit_gender_user, #formModalAdminEditPengguna #edit_password_user"
-    ).removeClass("is-invalid");
+
+    // Menghapus kelas 'is-invalid' dari input di form Tambah Pengguna
+    $("#formModalAdminAddPengguna #nama_lengkap_user, #formModalAdminAddPengguna #username_user, #formModalAdminAddPengguna #profil_user, #formModalAdminAddPengguna #email_user, #formModalAdminAddPengguna #level_user, #formModalAdminAddPengguna #password_user")
+        .removeClass("is-invalid");
+
+    // Menghapus kelas 'is-invalid' dari input di form Edit Pengguna
+    $("#formModalAdminEditPengguna #edit_nama_lengkap_user, #formModalAdminEditPengguna #edit_username_user, #formModalAdminEditPengguna #edit_email_user, #formModalAdminEditPengguna #edit_profil_user, #formModalAdminEditPengguna #edit_gender_user, #formModalAdminEditPengguna #edit_password_user")
+        .removeClass("is-invalid");
+
+    // Menampilkan pesan form-text
     $(".form-text").removeClass("d-none");
-    $(
-        "#formModalAdminAddPengguna #nama_lengkap_user, #formModalAdminAddPengguna #username_user, #formModalAdminAddPengguna #email_user, #formModalAdminAddPengguna #gender_user, #formModalAdminAddPengguna #password_user"
-    ).val("");
+
+    // Mengosongkan nilai input di form Tambah Pengguna
+    $("#formModalAdminAddPengguna #nama_lengkap_user, #formModalAdminAddPengguna #username_user, #formModalAdminAddPengguna #email_user, #formModalAdminAddPengguna #level_user, #formModalAdminAddPengguna #password_user")
+        .val("");
+
+    // Hapus pilihan pada radio button gender
+    $("#formModalAdminAddPengguna input[name='gender']").prop("checked", false);
+    $("#formModalAdminEditPengguna input[name='gender']").prop("checked", false);
 });
+
 
 // edit penguna
 $(".buttonEditPengguna").on("click", function () {
@@ -29,15 +40,25 @@ $(".buttonEditPengguna").on("click", function () {
             $("#edit_nama_lengkap_user").val(data[0].name);
             $("#edit_username_user").val(data[0].username);
             $("#edit_email_user").val(data[0].email);
-            data[0].gender == "Laki-Laki"
-                ? $("#gender_laki-laki").attr("selected", true)
-                : $("#gender_perempuan").attr("selected", true);
+
+            // Set gender
+            if (data[0].gender === "Laki-Laki") {
+                $("#gender_laki-laki").prop("checked", true);
+                $("#gender_perempuan").prop("checked", false);
+            } else {
+                $("#gender_laki-laki").prop("checked", false);
+                $("#gender_perempuan").prop("checked", true);
+            }
+
+            // Set level pendidikan
+            $("#edit_level_user").val(data[0].level);
+
             $("#formModalAdminEditPengguna").modal("show");
         },
     });
 });
 
-// delete quiz
+// delete pengguna
 $(".buttonDeletePengguna").on("click", function () {
     const data = $(this).data("name");
     const action = $(this).data("id");
