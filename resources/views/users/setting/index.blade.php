@@ -97,6 +97,31 @@
                             </div>
                         </div>
                         <div class="row mb-2 mb-lg-3">
+                            <label class="col-sm-2 col-form-label" for="level">Jenjang Pendidikan</label>
+                            <div class="col-sm-10">
+                                <select class="form-select @error('level') is-invalid @enderror" id="level"
+                                    name="level" required>
+                                    <option value="" disabled selected>Pilih Jenjang Pendidikan</option>
+                                    <option value="SD" {{ auth()->user()->level == 'SD' ? 'selected' : '' }}>
+                                        SD
+                                    </option>
+                                    <option value="SMP" {{ auth()->user()->level == 'SMP' ? 'selected' : '' }}>
+                                        SMP
+                                    </option>
+                                    <option value="SMA" {{ auth()->user()->level == 'SMA' ? 'selected' : '' }}>
+                                        SMA
+                                    </option>
+                                    <option value="Masyarakat Umum"
+                                        {{ auth()->user()->level == 'Masyarakat Umum' ? 'selected' : '' }}>
+                                        Masyarakat Umum
+                                    </option>
+                                </select>
+                                @error('level')
+                                    <div class="invalid-feedback" style="margin-bottom: -3px;">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row mb-2 mb-lg-3">
                             <label class="col-sm-2 col-form-label" for="jenisKelamin">Jenis Kelamin</label>
                             <div class="col-sm-10">
                                 <div class="form-check form-check-inline" style="margin-top: 5px;">

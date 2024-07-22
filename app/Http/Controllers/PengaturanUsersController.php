@@ -57,6 +57,7 @@ class PengaturanUsersController extends Controller
             'alamat' => 'Max:255',
             'gender' => 'in:Laki-Laki,Perempuan',
             'tanggal_lahir' => '',
+            'level' => 'required|in:SD,SMP,SMA,Masyarakat Umum',
             'image' => 'image|file|max:500|dimensions:ratio=1/1'
         ];
 
