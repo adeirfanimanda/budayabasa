@@ -4,7 +4,7 @@ $(".cancelModalAddMateri, .cancelModalEditMateri").on("click", function () {
     $(".modalAdminMateri")[0].reset();
 
     // Remove invalid feedback and reset input values
-    var inputs = $("#formModalAdminMateri #title, #formModalAdminMateri #deskripsi, #formModalAdminMateri #document, #formEditModalAdminMateri #titleEdit, #formEditModalAdminMateri #deskripsiEdit, #formEditModalAdminMateri #documentEdit");
+    var inputs = $("#formModalAdminMateri #title, #formModalAdminMateri #deskripsi, #formModalAdminMateri #document, #formModalAdminMateri #level, #formEditModalAdminMateri #titleEdit, #formEditModalAdminMateri #deskripsiEdit, #formEditModalAdminMateri #documentEdit");
     inputs.removeClass("is-invalid invalid-feedback").val("");
 });
 
@@ -13,6 +13,7 @@ $(".buttonEditMateri").on("click", function () {
     const code = $(this).data("code-materi");
     const title = $(this).data("title-materi");
     const desc = $(this).data("desc-materi");
+    const level = $(this).data("level-materi");
     const statusMateri = $(this).data("status-materi");
     statusMateri == "Aktif"
         ? $("#aktif").attr("selected", true)
@@ -20,6 +21,7 @@ $(".buttonEditMateri").on("click", function () {
     $(".codeMateri").val(code);
     $("#titleEdit").val(title);
     $("#deskripsiEdit").val(desc);
+    $("#levelEdit").val(level);
     $("#formEditModalAdminMateri").modal("show");
 });
 

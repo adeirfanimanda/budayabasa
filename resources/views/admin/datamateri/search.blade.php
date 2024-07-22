@@ -59,6 +59,7 @@
                                     <th class="text-white">Judul Materi</th>
                                     <th class="text-white">Deskripsi</th>
                                     <th class="text-white text-center">Dokumen</th>
+                                    <th class="text-white text-center">Jenjang Pendidikan</th>
                                     <th class="text-white">Tanggal Pembuatan Materi</th>
                                     <th class="text-white">Tanggal Update Materi</th>
                                     <th class="text-white">Status</th>
@@ -84,6 +85,18 @@
                                                 Unduh
                                             </a>
                                         </td>
+                                        <td class="text-center">
+                                            @if ($material->level == 'SD')
+                                                <span class="badge bg-label-success fw-bold">{{ 'SD' }}</span>
+                                            @elseif ($material->level == 'SMP')
+                                                <span class="badge bg-label-primary fw-bold">{{ 'SMP' }}</span>
+                                            @elseif ($material->level == 'SMA')
+                                                <span class="badge bg-label-info fw-bold">{{ 'SMA' }}</span>
+                                            @elseif ($material->level == 'Masyarakat Umum')
+                                                <span
+                                                    class="badge bg-label-warning fw-bold">{{ 'Masyarakat Umum' }}</span>
+                                            @endif
+                                        </td>
                                         <td>
                                             {{ $material->created_at->locale('id')->isoFormat('D MMMM YYYY | H:mm') }}
                                         </td>
@@ -107,6 +120,7 @@
                                                 data-code-materi="{{ encrypt($material->id) }}"
                                                 data-title-materi="{{ $material->title }}"
                                                 data-desc-materi="{{ $material->description }}"
+                                                data-level-materi="{{ $material->level }}"
                                                 data-status-materi="{{ $material->status }}">
                                                 <span class="tf-icons bx bx-edit" style="font-size: 15px;"></span>
                                             </button>
@@ -145,7 +159,8 @@
 
 <div id="errorModalAddMateri" data-error-title="@error('title') {{ $message }} @enderror"
     data-error-desc="@error('description') {{ $message }} @enderror"
-    data-error-document="@error('document') {{ $message }} @enderror">
+    data-error-document="@error('document') {{ $message }} @enderror"
+    data-error-level="@error('level') {{ $message }} @enderror">
 </div>
 <!-- Modal Add Materi-->
 <div class="modal fade" id="formModalAdminMateri" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
@@ -202,6 +217,26 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label for="level" class="form-label required-label">Jenjang Pendidikan</label>
+                            <select id="level" name="level"
+                                class="form-select @error('level') is-invalid @enderror" style="cursor: pointer;"
+                                required>
+                                <option value="" disabled selected>Pilih Jenjang Pendidikan</option>
+                                <option value="SD" {{ old('level') == 'SD' ? 'selected' : '' }}>SD</option>
+                                <option value="SMP" {{ old('level') == 'SMP' ? 'selected' : '' }}>SMP</option>
+                                <option value="SMA" {{ old('level') == 'SMA' ? 'selected' : '' }}>SMA</option>
+                                <option value="Masyarakat Umum"
+                                    {{ old('level') == 'Masyarakat Umum' ? 'selected' : '' }}>Masyarakat Umum</option>
+                            </select>
+                            @error('level')
+                                <div class="invalid-feedback" style="margin-bottom: -3px;">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-danger cancelModalAddMateri"
@@ -220,6 +255,7 @@
 <div id="errorModalEditMateri" data-error-edit-title="@error('titleEdit') {{ $message }} @enderror"
     data-error-edit-desc="@error('descriptionEdit') {{ $message }} @enderror"
     data-error-edit-document="@error('documentEdit') {{ $message }} @enderror"
+    data-error-edit-level="@error('levelEdit') {{ $message }} @enderror"
     data-error-edit-status="@error('status') {{ $message }} @enderror"></div>
 <!-- Modal Edit Materi-->
 <div class="modal fade" id="formEditModalAdminMateri" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
@@ -278,8 +314,25 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label for="levelEdit" class="form-label required-label">Jenjang Pendidikan</label>
+                            <select class="form-select @error('levelEdit') is-invalid @enderror" name="levelEdit"
+                                id="levelEdit">
+                                <option value="SD" {{ $material->level == 'SD' ? 'selected' : '' }}>SD</option>
+                                <option value="SMP" {{ $material->level == 'SMP' ? 'selected' : '' }}>SMP</option>
+                                <option value="SMA" {{ $material->level == 'SMA' ? 'selected' : '' }}>SMA</option>
+                                <option value="Masyarakat Umum"
+                                    {{ $material->level == 'Masyarakat Umum' ? 'selected' : '' }}>Masyarakat Umum
+                                </option>
+                            </select>
+                            @error('levelEdit')
+                                <div class="invalid-feedback" style="margin-bottom: -3px;">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="row statusEdit">
-                        <div class="col mb-0 mt-3">
+                        <div class="col mb-3">
                             <label for="status" class="form-label required-label">Status Materi</label>
                             <select class="form-select @error('status') is-invalid @enderror" name="status"
                                 id="status" style="cursor: pointer;">

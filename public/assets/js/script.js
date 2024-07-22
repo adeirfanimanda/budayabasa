@@ -270,17 +270,19 @@ $(function () {
     const errorAddMateriTitle = $("#errorModalAddMateri").data("error-title");
     const errorAddMateriDesc = $("#errorModalAddMateri").data("error-desc");
     const errorAddMateriDocument = $("#errorModalAddMateri").data("error-document");
+    const errorAddMateriLevel = $("#errorModalAddMateri").data("error-level");
     const errorEditMateriTitle = $("#errorModalEditMateri").data("error-edit-title");
     const errorEditMateriDesc = $("#errorModalEditMateri").data("error-edit-desc");
     const errorEditMateriDocument = $("#errorModalEditMateri").data("error-edit-document");
+    const errorEditMateriLevel = $("#errorModalEditMateri").data("error-edit-level");
     const errorEditMateriStatus = $("#errorModalEditMateri").data("error-edit-status");
 
     // Jika terjadi kesalahan saat Add dokumen
-    if (errorAddMateriTitle || errorAddMateriDesc || errorAddMateriDocument) {
+    if (errorAddMateriTitle || errorAddMateriDesc || errorAddMateriDocument || errorAddMateriLevel) {
         $("#formModalAdminMateri").modal("show");
     }
     // Jika terjadi kesalahan saat Edit dokumen
-    if (errorEditMateriTitle || errorEditMateriDesc || errorEditMateriDocument || errorEditMateriStatus) {
+    if (errorEditMateriTitle || errorEditMateriDesc || errorEditMateriDocument || errorEditMateriLevel || errorEditMateriStatus) {
         $("#formEditModalAdminMateri").modal("show");
     }
 

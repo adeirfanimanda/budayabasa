@@ -20,9 +20,26 @@ class MaterialController extends Controller
     // users show
     public function show()
     {
+        // Ambil level pengguna
+        $userLevel = auth()->user()->level;
+
+        // Jika pengguna memiliki level yang valid, hanya tampilkan materi untuk level tersebut
+        if ($userLevel && $userLevel != 'Masyarakat Umum') {
+            $materials = Material::where('status', 'Aktif')
+                ->where('level', $userLevel)
+                ->latest()
+                ->paginate(10);
+        } else {
+            // Jika pengguna tidak memiliki level, tampilkan materi 'Masyarakat Umum'
+            $materials = Material::where('status', 'Aktif')
+                ->where('level', 'Masyarakat Umum')
+                ->latest()
+                ->paginate(10);
+        }
+
         return view('users.materi.index', [
             'app' => Application::all(),
-            'materials' => Material::where('status', 'Aktif')->latest()->paginate(10),
+            'materials' => $materials,
             'title' => 'Materi'
         ]);
     }
@@ -35,10 +52,29 @@ class MaterialController extends Controller
             exit;
         }
 
+        // Ambil level pengguna
+        $userLevel = auth()->user()->level;
+
+        // Jika pengguna memiliki level yang valid, hanya tampilkan materi untuk level tersebut
+        if ($userLevel && $userLevel != 'Masyarakat Umum') {
+            $materials = Material::where('status', 'Aktif')
+                ->where('level', $userLevel)
+                ->latest()
+                ->searching2(request('q'))
+                ->paginate(10);
+        } else {
+            // Jika pengguna tidak memiliki level, tampilkan materi 'Masyarakat Umum'
+            $materials = Material::where('status', 'Aktif')
+                ->where('level', 'Masyarakat Umum')
+                ->latest()
+                ->searching2(request('q'))
+                ->paginate(10);
+        }
+
         return view('users.materi.search', [
             'app' => Application::all(),
             'title' => 'Data Materi',
-            'materials' => Material::latest()->searching2(request('q'))->paginate(10)
+            'materials' => $materials
         ]);
     }
 
@@ -48,6 +84,7 @@ class MaterialController extends Controller
             'title' => 'required|max:255|string',
             'description' => 'required|max:255|string',
             'document' => 'required|mimes:pdf,doc,docx|max:20000',
+            'level' => 'required|in:SD,SMP,SMA,Masyarakat Umum'
         ]);
 
         $validatedData['status'] = "Nonaktif";
@@ -68,6 +105,7 @@ class MaterialController extends Controller
             'titleEdit' => 'required|max:255|string',
             'descriptionEdit' => 'required|max:255|string',
             'documentEdit' => 'mimes:pdf,doc,docx|max:20000',
+            'levelEdit' => 'in:SD,SMP,SMA,Masyarakat Umum',
             'status' => 'required|in:Aktif,Nonaktif',
         ], [
             'titleEdit.required' => 'The title field is required.',
@@ -89,9 +127,12 @@ class MaterialController extends Controller
 
         $validatedData['title'] = $validatedData['titleEdit'];
         $validatedData['description'] = $validatedData['descriptionEdit'];
+        $validatedData['level'] = $validatedData['levelEdit'];
         unset($validatedData['titleEdit']);
         unset($validatedData['descriptionEdit']);
         unset($validatedData['documentEdit']);
+        unset($validatedData['levelEdit']);
+
         Material::where('id', decrypt($request->codeMateri))->update($validatedData);
         return back()->with('editMateriSuccess', 'Data materi berhasil diupdate!');
     }

@@ -14,7 +14,8 @@ class Material extends Model
     public function scopeSearching($query, $keyword)
     {
         $query->when($keyword, function ($query, $keyword) {
-            return $query->where('title', 'like', '%' . $keyword . '%');
+            return $query->where('title', 'like', '%' . $keyword . '%')
+                ->orWhere('level', 'like', '%' . $keyword . '%');
         });
     }
 
