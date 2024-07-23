@@ -401,21 +401,20 @@
                             <label for="edit_level_user" class="form-label required-label">Jenjang Pendidikan</label>
                             <select class="form-select" name="level" id="edit_level_user"
                                 style="cursor: pointer;">
-                                <option value="" disabled
-                                    {{ old('level', $user->level) == '' ? 'selected' : '' }}>
+                                <option value="" disabled {{ old('level') == '' ? 'selected' : '' }}>
                                     Pilih Jenjang Pendidikan
                                 </option>
-                                <option value="SD" {{ old('level', $user->level) == 'SD' ? 'selected' : '' }}>
+                                <option value="SD" {{ old('level') == 'SD' ? 'selected' : '' }}>
                                     SD
                                 </option>
-                                <option value="SMP" {{ old('level', $user->level) == 'SMP' ? 'selected' : '' }}>
+                                <option value="SMP" {{ old('level') == 'SMP' ? 'selected' : '' }}>
                                     SMP
                                 </option>
-                                <option value="SMA" {{ old('level', $user->level) == 'SMA' ? 'selected' : '' }}>
+                                <option value="SMA" {{ old('level') == 'SMA' ? 'selected' : '' }}>
                                     SMA
                                 </option>
                                 <option value="Masyarakat Umum"
-                                    {{ old('level', $user->level) == 'Masyarakat Umum' ? 'selected' : '' }}>
+                                    {{ old('level') == 'Masyarakat Umum' ? 'selected' : '' }}>
                                     Masyarakat Umum</option>
                             </select>
                         </div>
@@ -428,14 +427,14 @@
                                 <input
                                     class="form-check-input @if (session('validationErrors')) @foreach (session('validationErrors')['gender'] ?? [] as $errorMessage) is-invalid @endforeach @endif"
                                     type="radio" name="gender" id="gender_laki-laki" value="Laki-Laki"
-                                    {{ old('gender', $user->gender) == 'Laki-Laki' ? 'checked' : '' }} required>
+                                    {{ old('gender') == 'Laki-Laki' ? 'checked' : '' }} required>
                                 <label class="form-check-label" for="gender_laki-laki">Laki-Laki</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input
                                     class="form-check-input @if (session('validationErrors')) @foreach (session('validationErrors')['gender'] ?? [] as $errorMessage) is-invalid @endforeach @endif"
                                     type="radio" name="gender" id="gender_perempuan" value="Perempuan"
-                                    {{ old('gender', $user->gender) == 'Perempuan' ? 'checked' : '' }} required>
+                                    {{ old('gender') == 'Perempuan' ? 'checked' : '' }} required>
                                 <label class="form-check-label" for="gender_perempuan">Perempuan</label>
                             </div>
                             @if (session('validationErrors'))

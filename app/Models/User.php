@@ -52,6 +52,7 @@ class User extends Authenticatable implements MustVerifyEmail
                 ->orWhere('email', 'like', '%' . $keyword . '%')
                 ->orWhere('alamat', 'like', '%' . $keyword . '%')
                 ->orWhere('tanggal_lahir', 'like', '%' . $keyword . '%')
+                ->orWhere('level', 'like', '%' . $keyword . '%')
                 ->orWhere('gender', 'like', '%' . $keyword . '%')
                 ->orWhere('username', 'like', '%' . $keyword . '%');
         });
