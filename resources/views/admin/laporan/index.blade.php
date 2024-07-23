@@ -32,6 +32,7 @@
                                     <th class="text-white">No</th>
                                     <th class="text-white">Judul Latihan</th>
                                     <th class="text-white">Deskripsi Latihan</th>
+                                    <th class="text-white">Jenjang Pendidikan</th>
                                     <th class="text-white text-center">Total Yang Mengerjakan Latihan</th>
                                     <th class="text-white text-center">Aksi</th>
                                 </tr>
@@ -46,6 +47,18 @@
                                             <td style="font-size: 18px;">{{ Str::limit($data->title, 20, '...') }}</td>
                                         @endif
                                         <td>{{ Str::limit($data->description, 50, '...') }}</td>
+                                        <td class="text-center">
+                                            @if ($data->level == 'SD')
+                                                <span class="badge bg-label-success fw-bold">{{ 'SD' }}</span>
+                                            @elseif ($data->level == 'SMP')
+                                                <span class="badge bg-label-primary fw-bold">{{ 'SMP' }}</span>
+                                            @elseif ($data->level == 'SMA')
+                                                <span class="badge bg-label-info fw-bold">{{ 'SMA' }}</span>
+                                            @elseif ($data->level == 'Masyarakat Umum')
+                                                <span
+                                                    class="badge bg-label-warning fw-bold">{{ 'Masyarakat Umum' }}</span>
+                                            @endif
+                                        </td>
                                         <td class="text-center"><span
                                                 class="badge bg-label-primary fw-bold">{{ $data->result->count() }}&nbsp;Orang</span>
                                         </td>
