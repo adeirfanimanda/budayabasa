@@ -90,78 +90,102 @@
             </div>
             <ol type="A" style="margin-top: -10px; margin-left:10px; font-size: 1rem;">
                 @foreach ($score->question->answer as $answer)
-                    @if ($score->answer_id !== null)
-                        <li>
-                            <label class="form-check-label mb-1 text-capitalize"
-                                style="display:block; word-wrap: break-word; white-space: normal;">
-                                @if ($score->correct && $answer->answer === $score->answer->answer)
-                                    <div class="d-flex">
+                    <li>
+                        <label class="form-check-label mb-1 text-capitalize"
+                            style="display:block; word-wrap: break-word; white-space: normal;">
+                            @if ($score->answer_id !== null && $score->answer_id == $answer->id)
+                                @if ($score->correct)
+                                    <div class="d-flex align-items-center">
                                         @if (preg_match('/[\x{0000}-\x{007F}]/u', $answer->answer))
                                             <span class="badge bg-label-success text-capitalize"
-                                                style="text-transform:none; font-size: 0.9125em; padding: 0.42em 0.493em; text-align:start; line-height: 1;">{{ $answer->answer }}</span>&nbsp;<i
-                                                data-bs-toggle="tooltip" data-popup="tooltip-custom"
+                                                style="text-transform:none; font-size: 0.9125em; padding: 0.42em 0.493em; text-align:start; line-height: 1;">
+                                                {{ $answer->answer }}
+                                            </span>&nbsp;<i data-bs-toggle="tooltip" data-popup="tooltip-custom"
                                                 data-bs-placement="right" title="Jawaban Anda Benar!"
                                                 class="bx bx-check bx-tada text-success d-flex align-items-center cursor-pointer"
                                                 style="font-size: 20px;"></i>
                                         @else
                                             <span class="badge bg-label-success mt-2"
-                                                style="text-transform:none; font-size: 1.2rem; padding: 0.42em 0.493em; text-align:start; line-height: 1;">{{ $answer->answer }}</span>&nbsp;<i
-                                                data-bs-toggle="tooltip" data-popup="tooltip-custom"
+                                                style="text-transform:none; font-size: 1.2rem; padding: 0.42em 0.493em; text-align:start; line-height: 1;">
+                                                {{ $answer->answer }}
+                                            </span>&nbsp;<i data-bs-toggle="tooltip" data-popup="tooltip-custom"
                                                 data-bs-placement="right" title="Jawaban Anda Benar!"
                                                 class="bx bx-check bx-tada text-success d-flex align-items-center cursor-pointer"
                                                 style="font-size: 20px;"></i>
                                         @endif
                                     </div>
-                                @elseif(!$score->correct && $answer->answer === $score->answer->answer)
-                                    <div class="d-flex">
-                                        @if (preg_match('/[\x{0000}-\x{007F}]/u', $answer->answer))
-                                            <span class="badge bg-label-danger text-capitalize"
-                                                style="text-transform:none; font-size: 0.9125em; padding: 0.42em 0.493em; text-align:start; line-height: 1;">{{ $answer->answer }}</span>&nbsp;<i
-                                                data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                                data-bs-placement="right" title="Jawaban Anda Salah!"
-                                                class="bx bx-x bx-tada text-danger d-flex align-items-center cursor-pointer"
-                                                style="font-size: 20px;"></i>
-                                        @else
-                                            <span class="badge bg-label-danger mt-2"
-                                                style="text-transform:none; font-size: 1.2rem; padding: 0.42em 0.493em; text-align:start; line-height: 1;">{{ $answer->answer }}</span>&nbsp;<i
-                                                data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                                data-bs-placement="right" title="Jawaban Anda Salah!"
-                                                class="bx bx-x bx-tada text-danger d-flex align-items-center cursor-pointer"
-                                                style="font-size: 20px;"></i>
-                                        @endif
-                                    </div>
                                 @else
                                     @if (preg_match('/[\x{0000}-\x{007F}]/u', $answer->answer))
-                                        <div>{{ $answer->answer }}</div>
+                                        <div class="d-flex align-items-center">
+                                            <span class="badge bg-label-danger text-capitalize"
+                                                style="text-transform:none; font-size: 0.9125em; padding: 0.42em 0.493em; text-align:start; line-height: 1;">
+                                                {{ $answer->answer }}
+                                            </span>&nbsp;<i data-bs-toggle="tooltip" data-popup="tooltip-custom"
+                                                data-bs-placement="right" title="Jawaban Anda Salah!"
+                                                class="bx bx-x bx-tada text-danger d-flex align-items-center cursor-pointer"
+                                                style="font-size: 20px;"></i>
+                                        </div>
                                     @else
-                                        <div style="font-size: 1.3rem;">{{ $answer->answer }}</div>
+                                        <div class="d-flex align-items-center">
+                                            <span class="badge bg-label-danger mt-2"
+                                                style="text-transform:none; font-size: 1.2rem; padding: 0.42em 0.493em; text-align:start; line-height: 1;">
+                                                {{ $answer->answer }}
+                                            </span>&nbsp;<i data-bs-toggle="tooltip" data-popup="tooltip-custom"
+                                                data-bs-placement="right" title="Jawaban Anda Salah!"
+                                                class="bx bx-x bx-tada text-danger d-flex align-items-center cursor-pointer"
+                                                style="font-size: 20px;"></i>
+                                        </div>
                                     @endif
                                 @endif
-                            </label>
-                        </li>
-                    @else
-                        <li>
-                            @if (preg_match('/[\x{0000}-\x{007F}]/u', $answer->answer))
-                                <label class="form-check-label mb-1">
-                                    {{ $answer->answer }}
-                                </label>
                             @else
-                                <label class="form-check-label mb-1" style="font-size: 1.2rem;">
-                                    {{ $answer->answer }}
-                                </label>
+                                @if (!$score->correct && $answer->correct)
+                                    @if (preg_match('/[\x{0000}-\x{007F}]/u', $answer->answer))
+                                        <div class="d-flex align-items-center">
+                                            <span class="badge bg-label-info text-capitalize"
+                                                style="text-transform:none; font-size: 0.9125em; padding: 0.42em 0.493em; text-align:start; line-height: 1;">
+                                                {{ $answer->answer }}
+                                            </span>&nbsp;<i data-bs-toggle="tooltip" data-popup="tooltip-custom"
+                                                data-bs-placement="right" title="Jawaban yang Benar!"
+                                                class="bx bx-info-circle bx-tada text-info d-flex align-items-center cursor-pointer"
+                                                style="font-size: 20px;"></i>
+                                        </div>
+                                    @else
+                                        <div class="d-flex align-items-center">
+                                            <span class="badge bg-label-info mt-2"
+                                                style="text-transform:none; font-size: 1.2rem; padding: 0.42em 0.493em; text-align:start; line-height: 1;">
+                                                {{ $answer->answer }}
+                                            </span>&nbsp;<i data-bs-toggle="tooltip" data-popup="tooltip-custom"
+                                                data-bs-placement="right" title="Jawaban yang Benar"
+                                                class="bx bx-check bx-tada text-info d-flex align-items-center cursor-pointer"
+                                                style="font-size: 20px;"></i>
+                                        </div>
+                                    @endif
+                                @else
+                                    @if (preg_match('/[\x{0000}-\x{007F}]/u', $answer->answer))
+                                        <div class="d-flex align-items-center">
+                                            {{ $answer->answer }}
+                                        </div>
+                                    @else
+                                        <div class="d-flex align-items-center" style="font-size: 1.3rem;">
+                                            {{ $answer->answer }}
+                                        </div>
+                                    @endif
+                                @endif
                             @endif
-                        </li>
-                    @endif
+                        </label>
+                    </li>
                 @endforeach
             </ol>
             @if ($score->answer_id == null)
-                <div class="d-flex" style="margin-left: 20px; margin-top:-10px; margin-bottom:20px"><span
-                        class="badge bg-label-warning"
-                        style="text-transform:none; font-size: 0.9125em; padding: 0.42em 0.493em;">Anda tidak menjawab
-                        soal ini!</span>&nbsp;<i data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                        data-bs-placement="right" title="Jawaban Anda Salah!"
+                <div class="d-flex" style="margin-left: 20px; margin-top:-10px; margin-bottom:20px">
+                    <span class="badge bg-label-warning"
+                        style="text-transform:none; font-size: 0.9125em; padding: 0.42em 0.493em;">
+                        Anda tidak menjawab soal ini!
+                    </span>&nbsp;<i data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="right"
+                        title="Jawaban Anda Salah!"
                         class="bx bx-error text-warning bx-flashing d-flex align-items-center cursor-pointer"
-                        style="font-size: 20px;"></i></div>
+                        style="font-size: 20px;"></i>
+                </div>
             @endif
         @endforeach
     </div>
