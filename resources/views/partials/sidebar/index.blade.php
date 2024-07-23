@@ -25,7 +25,7 @@
     </li>
 @endcan
 @can('user')
-    <li class="menu-item {{ Request::is('materi') ? 'active' : '' }}">
+    <li class="menu-item {{ Request::is('materi*') ? 'active' : '' }}">
         <a class="menu-link cursor-pointer" onclick="window.location.href='/materi'">
             <i class="menu-icon tf-icons bx bx-book-content"></i>
             <div>Materi</div>
