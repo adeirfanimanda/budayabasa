@@ -317,11 +317,21 @@
                             <label for="levelEdit" class="form-label required-label">Jenjang Pendidikan</label>
                             <select class="form-select @error('levelEdit') is-invalid @enderror" name="levelEdit"
                                 id="levelEdit">
-                                <option value="SD" {{ $material->level == 'SD' ? 'selected' : '' }}>SD</option>
-                                <option value="SMP" {{ $material->level == 'SMP' ? 'selected' : '' }}>SMP</option>
-                                <option value="SMA" {{ $material->level == 'SMA' ? 'selected' : '' }}>SMA</option>
+                                <option value="" disabled {{ old('levelEdit') == '' ? 'selected' : '' }}>
+                                    Pilih Jenjang Pendidikan
+                                </option>
+                                <option value="SD" {{ old('levelEdit') == 'SD' ? 'selected' : '' }}>
+                                    SD
+                                </option>
+                                <option value="SMP" {{ old('levelEdit') == 'SMP' ? 'selected' : '' }}>
+                                    SMP
+                                </option>
+                                <option value="SMA" {{ old('levelEdit') == 'SMA' ? 'selected' : '' }}>
+                                    SMA
+                                </option>
                                 <option value="Masyarakat Umum"
-                                    {{ $material->level == 'Masyarakat Umum' ? 'selected' : '' }}>Masyarakat Umum
+                                    {{ old('levelEdit') == 'Masyarakat Umum' ? 'selected' : '' }}>
+                                    Masyarakat Umum
                                 </option>
                             </select>
                             @error('levelEdit')
