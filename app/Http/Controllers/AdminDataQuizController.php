@@ -27,6 +27,7 @@ class AdminDataQuizController extends Controller
         $validated = $request->validate([
             'title' => 'required|max:255',
             'description' => 'required|max:255',
+            'level' => 'required|in:SD,SMP,SMA,Masyarakat Umum',
         ]);
 
         $validated['slug'] = encrypt(date('Y-m-d H i s'));
@@ -115,6 +116,7 @@ class AdminDataQuizController extends Controller
         $validated = $request->validate([
             'titleQuiz' => 'required|max:255',
             'descriptionQuiz' => 'required|max:255',
+            'levelEdit' => 'required|in:SD,SMP,SMA,Masyarakat Umum',
             'status' => 'required|in:Aktif,Nonaktif',
         ], [
             'titleQuiz.required' => 'The title field is required.',
@@ -125,8 +127,10 @@ class AdminDataQuizController extends Controller
 
         $validated['title'] = $validated['titleQuiz'];
         $validated['description'] = $validated['descriptionQuiz'];
+        $validated['level'] = $validated['levelEdit'];
         unset($validated['titleQuiz']);
         unset($validated['descriptionQuiz']);
+        unset($validated['levelEdit']);
 
         Quiz::where('slug', $request->codeQuiz)
             ->update($validated);

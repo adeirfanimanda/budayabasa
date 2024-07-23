@@ -3,7 +3,7 @@ $(".cancelModalAddQuiz, .cancelModalEditQuiz").on("click", function () {
     $(".modalAdminQuiz")[0].reset();
 
     // Remove invalid feedback and reset input values
-    var inputs = $("#formModalAdminQuiz #deskripsi, #formModalAdminQuiz #title, #formEditModalAdminQuiz #deskripsiEdit, #formEditModalAdminQuiz #titleEdit");
+    var inputs = $("#formModalAdminQuiz #title, #formModalAdminQuiz #deskripsi, #formModalAdminQuiz #level, #formEditModalAdminQuiz #deskripsiEdit, #formEditModalAdminQuiz #titleEdit, #formEditModalAdminQuiz #levelEdit");
     inputs.removeClass("is-invalid invalid-feedback").val("");
 });
 
@@ -11,6 +11,7 @@ $(".cancelModalAddQuiz, .cancelModalEditQuiz").on("click", function () {
 $(".buttonEditQuiz").on("click", function () {
     const title = $(this).data("title-quiz");
     const desc = $(this).data("desc-quiz");
+    const level = $(this).data("level-quiz");
     const codeQuiz = $(this).data("code-quiz");
     const statusQuiz = $(this).data("status-quiz");
     statusQuiz == "Aktif"
@@ -18,6 +19,7 @@ $(".buttonEditQuiz").on("click", function () {
         : $("#nonaktif").attr("selected", true);
     $("#titleEdit").val(title);
     $("#deskripsiEdit").val(desc);
+    $("#levelEdit").val(level);
     $(".codeQuiz").val(codeQuiz);
     $("#formEditModalAdminQuiz").modal("show");
 });

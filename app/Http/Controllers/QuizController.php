@@ -15,10 +15,27 @@ class QuizController extends Controller
 {
     public function index()
     {
+        // Ambil level pengguna
+        $userLevel = auth()->user()->level;
+
+        // Jika pengguna memiliki level yang valid, hanya tampilkan materi untuk level tersebut
+        if ($userLevel && $userLevel != 'Masyarakat Umum') {
+            $quiz = Quiz::where('status', 'Aktif')
+                ->where('level', $userLevel)
+                ->latest()
+                ->paginate(6);
+        } else {
+            // Jika pengguna tidak memiliki level, tampilkan materi 'Masyarakat Umum'
+            $quiz = Quiz::where('status', 'Aktif')
+                ->where('level', 'Masyarakat Umum')
+                ->latest()
+                ->paginate(6);
+        }
+
         return view('users.quiz.index', [
             'app' => Application::all(),
             'title' => 'Latihan',
-            'quizzes' => Quiz::where('status', 'Aktif')->latest()->paginate(6)
+            'quizzes' => $quiz
         ]);
     }
 

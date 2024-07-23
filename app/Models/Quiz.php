@@ -18,7 +18,8 @@ class Quiz extends Model
             return $query->where('status', 'like', '%' . $keyword . '%')
                 ->orWhere('created_at', 'like', '%' . $keyword . '%')
                 ->orWhere('title', 'like', '%' . $keyword . '%')
-                ->orWhere('description', 'like', '%' . $keyword . '%');
+                ->orWhere('description', 'like', '%' . $keyword . '%')
+                ->orWhere('level', 'like', '%' . $keyword . '%');
         });
     }
 

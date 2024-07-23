@@ -59,6 +59,7 @@
                                     <th class="text-white">Judul Latihan</th>
                                     <th class="text-white">Deskripsi Latihan</th>
                                     <th class="text-white text-center">Total Soal</th>
+                                    <th class="text-white text-center">Jenjang Pendidikan</th>
                                     <th class="text-white">Tanggal Pembuatan Latihan</th>
                                     <th class="text-white">Tanggal Update Latihan</th>
                                     <th class="text-white">Status</th>
@@ -77,6 +78,18 @@
                                         <td>{{ Str::limit($quiz->description, 50, '...') }}</td>
                                         <td class="text-center"><span
                                                 class="badge badge-center bg-dark rounded-pill">{{ $quiz->question->count() }}</span>
+                                        </td>
+                                        <td class="text-center">
+                                            @if ($quiz->level == 'SD')
+                                                <span class="badge bg-label-success fw-bold">{{ 'SD' }}</span>
+                                            @elseif ($quiz->level == 'SMP')
+                                                <span class="badge bg-label-primary fw-bold">{{ 'SMP' }}</span>
+                                            @elseif ($quiz->level == 'SMA')
+                                                <span class="badge bg-label-info fw-bold">{{ 'SMA' }}</span>
+                                            @elseif ($quiz->level == 'Masyarakat Umum')
+                                                <span
+                                                    class="badge bg-label-warning fw-bold">{{ 'Masyarakat Umum' }}</span>
+                                            @endif
                                         </td>
                                         <td>{{ $quiz->created_at->locale('id')->isoFormat('D MMMM YYYY | H:mm') }}</td>
                                         <td>{{ $quiz->updated_at->locale('id')->isoFormat('D MMMM YYYY | H:mm') }}</td>
@@ -101,6 +114,7 @@
                                                 data-title-quiz="{{ $quiz->title }}"
                                                 data-code-quiz="{{ $quiz->slug }}"
                                                 data-desc-quiz="{{ $quiz->description }}"
+                                                data-level-quiz="{{ $quiz->level }}"
                                                 data-status-quiz="{{ $quiz->status }}">
                                                 <span class="tf-icons bx bx-edit" style="font-size: 15px;"></span>
                                             </button>
@@ -136,7 +150,9 @@
 </div>
 
 <div id="errorModalAddQuiz" data-error-title="@error('title') {{ $message }} @enderror"
-    data-error-desc="@error('description') {{ $message }} @enderror"></div>
+    data-error-desc="@error('description') {{ $message }} @enderror"
+    data-error-level="@error('level') {{ $message }} @enderror">
+</div>
 <!-- Modal Add Quiz-->
 <div class="modal fade" id="formModalAdminQuiz" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -144,8 +160,8 @@
             @csrf
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between">
-                    <h5 class="modal-title text-primary fw-bold">Tambah Latihan Baru&nbsp;<i class='bx bx-joystick fs-5'
-                            style="margin-bottom: 1px;"></i></h5>
+                    <h5 class="modal-title text-primary fw-bold">Tambah Latihan Baru&nbsp;<i
+                            class='bx bx-joystick fs-5' style="margin-bottom: 1px;"></i></h5>
                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow cancelModalAddQuiz"
                         data-bs-dismiss="modal"><i class="bx bx-x-circle text-danger fs-4" data-bs-toggle="tooltip"
                             data-popup="tooltip-custom" data-bs-placement="auto" title="Tutup"></i></button>
@@ -165,11 +181,31 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col">
+                        <div class="col mb-3">
                             <label for="deskripsi" class="form-label required-label">Deskripsi</label>
                             <textarea class="form-control @error('description') is-invalid @enderror" id="deskripsi" name="description"
                                 autocomplete="off" placeholder="Masukkan deskripsi latihan. (max 255 karakter)" rows="4" required>{{ old('description') }}</textarea>
                             @error('description')
+                                <div class="invalid-feedback" style="margin-bottom: -3px;">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label for="level" class="form-label required-label">Jenjang Pendidikan</label>
+                            <select id="level" name="level"
+                                class="form-select @error('level') is-invalid @enderror" style="cursor: pointer;"
+                                required>
+                                <option value="" disabled selected>Pilih Jenjang Pendidikan</option>
+                                <option value="SD" {{ old('level') == 'SD' ? 'selected' : '' }}>SD</option>
+                                <option value="SMP" {{ old('level') == 'SMP' ? 'selected' : '' }}>SMP</option>
+                                <option value="SMA" {{ old('level') == 'SMA' ? 'selected' : '' }}>SMA</option>
+                                <option value="Masyarakat Umum"
+                                    {{ old('level') == 'Masyarakat Umum' ? 'selected' : '' }}>Masyarakat Umum</option>
+                            </select>
+                            @error('level')
                                 <div class="invalid-feedback" style="margin-bottom: -3px;">
                                     {{ $message }}
                                 </div>
@@ -191,7 +227,9 @@
 
 <div id="errorModalEditQuiz" data-error-edit-title="@error('titleQuiz') {{ $message }} @enderror"
     data-error-edit-desc="@error('descriptionQuiz') {{ $message }} @enderror"
-    data-error-edit-status="@error('status') {{ $message }} @enderror"></div>
+    data-error-edit-level="@error('level') {{ $message }} @enderror"
+    data-error-edit-status="@error('status') {{ $message }} @enderror">
+</div>
 <!-- Modal Edit Quiz-->
 <div class="modal fade" id="formEditModalAdminQuiz" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -221,7 +259,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col">
+                        <div class="col mb-3">
                             <label for="deskripsiEdit" class="form-label required-label">Deskripsi</label>
                             <textarea class="form-control @error('descriptionQuiz') is-invalid @enderror" id="deskripsiEdit"
                                 name="descriptionQuiz" placeholder="Masukkan deskripsi latihan. (max 255 karakter)" rows="4"
@@ -233,8 +271,35 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label for="levelEdit" class="form-label required-label">Jenjang Pendidikan</label>
+                            <select class="form-select @error('levelEdit') is-invalid @enderror" name="levelEdit"
+                                id="levelEdit">
+                                <option value="" disabled {{ old('levelEdit') == '' ? 'selected' : '' }}>
+                                    Pilih Jenjang Pendidikan
+                                </option>
+                                <option value="SD" {{ old('levelEdit') == 'SD' ? 'selected' : '' }}>
+                                    SD
+                                </option>
+                                <option value="SMP" {{ old('levelEdit') == 'SMP' ? 'selected' : '' }}>
+                                    SMP
+                                </option>
+                                <option value="SMA" {{ old('levelEdit') == 'SMA' ? 'selected' : '' }}>
+                                    SMA
+                                </option>
+                                <option value="Masyarakat Umum"
+                                    {{ old('levelEdit') == 'Masyarakat Umum' ? 'selected' : '' }}>
+                                    Masyarakat Umum
+                                </option>
+                            </select>
+                            @error('levelEdit')
+                                <div class="invalid-feedback" style="margin-bottom: -3px;">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="row statusQuiz">
-                        <div class="col mb-0 mt-3">
+                        <div class="col mb-3">
                             <label for="status" class="form-label required-label">Status Latihan</label>
                             <select class="form-select @error('status') is-invalid @enderror" name="status"
                                 id="status" style="cursor: pointer;">

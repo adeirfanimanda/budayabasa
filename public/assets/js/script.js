@@ -43,16 +43,18 @@ $(function () {
     // Penanganan error form modal saat Add & Edit quiz
     const errorTitle = $("#errorModalAddQuiz").data("error-title");
     const errorDesc = $("#errorModalAddQuiz").data("error-desc");
+    const errorLevel = $("#errorModalAddQuiz").data("error-level");
     const errorEditTitle = $("#errorModalEditQuiz").data("error-edit-title");
     const errorEditDesc = $("#errorModalEditQuiz").data("error-edit-desc");
+    const errorEditLevel = $("#errorModalEditQuiz").data("error-edit-level");
     const errorEditStatus = $("#errorModalEditQuiz").data("error-edit-status");
 
     // Jika terjadi kesalahan saat Add quiz
-    if (errorTitle || errorDesc) {
+    if (errorTitle || errorDesc || errorLevel) {
         $("#formModalAdminQuiz").modal("show");
     }
     // Jika terjadi kesalahan saat Edit quiz
-    if (errorEditTitle || errorEditDesc || errorEditStatus) {
+    if (errorEditTitle || errorEditDesc || errorEditStatus || errorEditLevel) {
         $("#formEditModalAdminQuiz").modal("show");
     }
 
