@@ -184,10 +184,6 @@
                                 data-target=".comment-reply-{{ $comment->id }}"><i
                                     class='bx bx-share fs-6 bx-sm mx-1'></i>Balas
                             </div>
-                            <div class="me-2 text-warning fw-bold toggle-reply-form"
-                                data-target=".comment-reply-{{ $comment->id }}"><i
-                                    class='bx bx-message-dots fs-6 bx-sm mx-1'></i>Kutip
-                            </div>
                             @if ($comment->user->id == auth()->user()->id)
                                 <div class="text-danger fw-bold button-delete-comment"
                                     data-message-comment="{{ $comment->comment }}"
